@@ -1,0 +1,212 @@
+body {
+    background-color: #47506b;
+}
+
+main {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #ddd;
+    display: grid;
+    grid-template-columns: 60% 35%;
+    gap: 24px;
+}
+
+header, footer {
+    background-color: #262d40;
+    padding: 16px;
+    width: 90vw;
+    margin: 0 auto;
+    border-radius: 18px;
+    max-width: 1024px;
+}
+
+header {
+    display: flex;
+}
+
+.round {
+    mask-image: url('/assets/img/photo.svg');
+    mask-repeat: no-repeat;
+    mask-position: top;
+    mask-size: 100%;
+    margin-top: 5px;
+    border: 4px solid rgba(0,0,0,0.6);
+}
+
+article .photo {
+    float: right;
+}
+
+.photo {
+    mask-image: url('/assets/img/photo.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 100%;
+    background-image: url('/assets/img/brent.jpeg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.photo {
+    width: 190px;
+    height: 200px;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-col li {
+    font-size: 18px;
+}
+
+footer p, footer a {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    font-size: 12px;
+    color: rgba(135, 146, 199, 0.7);
+}
+
+aside {
+    border-radius: 18px;
+    padding: 24px;
+    background-color: rgba(224, 189, 150, 0.5);
+    color: #fff;
+}
+
+details p {
+    background-color: #262d40;
+    padding: 16px;
+    border-radius: 18px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+}
+
+button:hover {
+    cursor: pointer
+}
+
+section {
+    display: flex;
+    gap: 24px;
+    flex-direction: column; 
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    gap: 8px;
+}
+
+form {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 20px;
+    max-width: 664px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+a {
+    color: #7e99ed;
+}
+
+header a:not(.logo) {
+    color: #ddd;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    background-color: rgba(30, 32, 38, 0.7);
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+header a:not(.logo):hover {
+    background-color: rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
+.form-wrap {
+    min-width: 260px;
+    padding: 24px 24px 24px 0;
+}
+
+.form-wrap form {
+    width: 100%;
+}
+
+.form-control {
+    flex-grow: 2;
+}
+
+label {
+    font-weight: 700;
+}
+
+input, textarea {
+    border: none;
+    margin-left: 12px;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 480px;
+}
+
+input[type=text], input[type=email] {
+    height: 30px;
+}
+
+textarea {
+    min-height: 200px;
+}
+
+button {
+    max-width: 140px;
+    padding: 14px;
+    background-color: #304a3b;
+    color: #eee;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    box-shadow: rgba(0,0,0,0.3) 2px 2px 10px 4px;
+}
+button:hover {
+    background-color: #182a20;
+}
+
+@media(max-width: 769px) {
+    body {
+        height: 100vh;
+    }
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 100vh;
+    }
+    p {
+        font-size: 32px;
+    }
+    article .photo {
+        float: none;
+    }
+    #signup {
+        width: 100vw;
+    }
+    input, textarea {
+        max-width: 320px;
+    }
+    
+}

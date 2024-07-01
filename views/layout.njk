@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <link rel="stylesheet" href="/assets/main.css"/>
+      <title>
+        {% block title %}{% endblock %}Brent Lawson Portfolio</title>
+    {% endblock %}
+  </head>
+  <body>
+  {% block header %}{% endblock %}
+      <main>
+          <div id="container">
+      {% block content %}{% endblock %}
+    </div>
+      <aside id="template-aside">
+      </aside>
+      <div id="signup">
+        <h3>Get in Touch</h3>
+      <button>Sign Up Form</button>
+    </div>
+    </main>
+    <footer>
+      {% block footer %}
+      {% endblock %}
+    </footer>
+  </body>
+</html>
