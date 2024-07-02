@@ -145,6 +145,15 @@ a {
     color: #7e99ed;
 }
 
+span.stretch {
+    display: inline-block;
+    margin: 22px;
+    -webkit-transform: scale(2, 1);
+    -moz-transform: scale(2, 1);
+    -o-transform: scale(2, 1);
+    transform: scale(2, 1);
+  }
+
 .form-wrap {
     transition: max-height 0.75s ease;
     max-height: 0;
