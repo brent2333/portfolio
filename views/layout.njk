@@ -8,21 +8,71 @@
     {% endblock %}
   </head>
   <body>
-  {% block header %}{% endblock %}
-      <main>
-          <div id="container">
-      {% block content %}{% endblock %}
+  <header>
+    <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
+    <div>
+        <ul>
+        {% for navItem in navList %}
+            <li><a href={{ navItem.url }}>{{ navItem.text }}</a></li>
+        {% endfor %}
+        </ul>
     </div>
-      <aside id="template-aside">
-      </aside>
+</header>
+      <main>
+      {% block content %}{% endblock %}
       <div id="signup">
         <h3>Get in Touch</h3>
-      <button>Sign Up Form</button>
+      <button id="sign-up-btn">Sign Up Form</button>
+      <div class="form-wrap">
+        <form id="userForm" method="post" action="/users/sendmessage">
+        <div class="flex">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" name="name" required class="form-control">
+        </div>
+    
+        <div class="flex">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" required class="form-control">
+        </div>
+    
+        <div class="flex">
+            <label for="message" class="form-label">Message:</label>
+            <textarea id="message" name="message" required class="form-control"></textarea>
+        </div>
+    
+        <button type="submit" class="btn btn-dark">Send Message</button>
+    </form>
     </div>
     </main>
     <footer>
-      {% block footer %}
-      {% endblock %}
+      <p>&copy; Copyright 2024</p>
     </footer>
+    <script>
+      (function() {
+        document.addEventListener("DOMContentLoaded", (event) => {
+          const formBtn = document.getElementById('sign-up-btn');
+          const formWrap = document.querySelectorAll('.form-wrap')[0];
+          formBtn.addEventListener('click', () => {
+            formWrap.classList.add('open-form');
+            formBtn.classList.add('hidden');
+          });
+          const form = document.getElementById('userForm');
+          form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var data = this;
+          fetch(data.getAttribute('action'), {
+          method: data.getAttribute('method'),
+          body: new FormData(data)
+          }).then(res=>res.text())
+          .then(function (data) {
+              const response = fetch('/thanks').then(res=>res.text())
+              .then(function (data) {
+                formWrap.innerHTML = data;
+              });
+          });
+      });
+    });
+      }())
+  </script>
   </body>
 </html>

@@ -70,6 +70,24 @@ article .photo {
     font-size: 18px;
 }
 
+.hidden {
+    display: none;
+}
+
+header a:not(.logo) {
+    color: #ddd;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    background-color: rgba(30, 32, 38, 0.7);
+    padding: 6px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+header a:not(.logo):hover {
+    background-color: rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+
 footer p, footer a {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
     font-size: 12px;
@@ -80,7 +98,7 @@ aside {
     border-radius: 18px;
     padding: 24px;
     background-color: rgba(224, 189, 150, 0.5);
-    color: #fff;
+    color: #eee;
 }
 
 details p {
@@ -127,21 +145,15 @@ a {
     color: #7e99ed;
 }
 
-header a:not(.logo) {
-    color: #ddd;
-    font-weight: 700;
-    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
-    background-color: rgba(30, 32, 38, 0.7);
-    padding: 6px 8px;
-    border-radius: 4px;
-}
-header a:not(.logo):hover {
-    background-color: rgba(0,0,0,0.4);
-    cursor: pointer;
+.form-wrap {
+    transition: max-height 0.75s ease;
+    max-height: 0;
+    overflow: hidden;
+    min-width: 260px;
 }
 
-.form-wrap {
-    min-width: 260px;
+.form-wrap.open-form {
+    max-height: 440px;
     padding: 24px 24px 24px 0;
 }
 

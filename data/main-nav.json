@@ -1,0 +1,6 @@
+{
+    "navList": [
+      { "text": "About Me", "url": "/about-me" },
+      { "text": "About This Site", "url": "/about-site" }
+    ]
+  }

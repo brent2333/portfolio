@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div id="container">
+<section>
+    <div>
+    <h1>About Me</h1>
+    <details>
+        <summary>TL;DR</summary>
+        <p>I've been a dev and a leader for a good number of years touching various tech stacks and in various industries.</p>
+      </details>
+      <p>I started out as a graphic designer with an entrepreneurial bent. While working as a graphics professional, I took on freelance clients who were local small business owners. A couple of them asked if I could build them a website, and the rest is history.</p>
+      <p>Teaching myself about the web back in 2010 consisted of hacking away at the usual suspects such as WordPress and JQuery along with other bad words I am not allowed to utter amongst my colleagues. I did make sincere efforts to understand JavaScript (yes, I was comfortable with type coercion and prototypes), the CSS cascade and HTML semantics as well. The trial-by-fire at my first real gig, at early SEO player Medium Blue in Atlanta, forced me to get cozy with Apache server and strengthen my MAMP stack skills as well as earn certifications for Conversion and Analytics from Market Motive.</p>
+      <p>A short-lived golden era ensued where I was enthusiastically making use of my new-found understanding of what makes the web work. As I tend to set fairly high standards for myself, the emerging SPA technologies were something I sought to learn and use on the job.</p>
+      <p>Fast forward a few years and I was a Senior Web Developer working with Angular, React etc. for companies like WebMD, Weather Company, Autotrader and the like in the Atlanta, GA area. Finally, I landed a manger gig; my first leadership position with Focus Brands (now called GoTo Foods). This experience was putting all of my good soft-skills to the test as a mentor and liasion between the brands and engineering department. This was having a negative impact on my ability to find time and energy to keep my coding skill sharp and current.</p>
+      <p>The next several years were focused on staying up to date as the Front-End landscape became increasingly complex. I did have one year-long tenure as a team lead. My emotional intelligence, range of abilities and "never-say-no" attitude tends to make me a target with leadership.</p>
+    </div>
+</section>
+</div>
+<aside id="template-aside">
+    <h3>Technologies</h3>
+    <ul class="flex-col">
+    {% for techItem in techList %}
+            <li>{{ techItem }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Related Skills</h3>
+    <ul class="flex-col">
+        {% for skillItem in relatedSkills %}
+        <li>{{ skillItem }}</li>
+    {% endfor %}
+</ul>
+</aside>
+
+{% endblock %}

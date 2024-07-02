@@ -4,8 +4,11 @@ const formidable = require("express-formidable");
 const path = require("path");
 
 const usersRouter = require("./public/routes/users");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const { mainNav, pageDataMap } = require("./data/index.js");
 
 const isDev = app.get("env") === "development";
 
@@ -24,8 +27,13 @@ nunjucks.configure("views", {
 app.set("view engine", "njk");
 app.use(express.static(path.join(__dirname, "public")));
 
+const getDataOptions = (url) => {
+  const PageData = { ...mainNav, ...pageDataMap[url] };
+  return PageData;
+};
+
 app.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.render("index", mainNav);
 });
 
 // apis
@@ -34,43 +42,25 @@ app.use("/users", usersRouter);
 const options = {
   root: path.join(__dirname),
 };
-// const fourOhFour = "/public/fourohfour.html";
-
-// const sendHome = (res) => {
-//   const fileName = "/public/index.html";
-//   res.sendFile(fileName, options, function (err) {
-//     if (err) {
-//       res.sendFile(fourOhFour, options);
-//       console.error("Error sending file:", err);
-//     }
-//   });
-// };
-
-// const sendFourOhFour = (res) => {
-//   res.sendFile(fourOhFour, options);
-// };
-
-// const returnHTML = (req, res, name) => {
-//   if (req.headers["hx-request"]) {
-//     const fileName = `/public/${name}.html`;
-//     res.sendFile(fileName, options, function (err) {
-//       if (err) {
-//         sendFourOhFour(res);
-//         console.error("Error sending file:", err);
-//       }
-//     });
-//   } else {
-//     sendHome(res);
-//   }
-// };
 
 // assets
 app.get("/assets", function (req, res) {
-  res.sendFile(req.originalUrl, options, function (err) {
+  res.render(req.originalUrl, function (err) {
     if (err) {
       console.error("Error sending asset:", err);
     }
   });
+});
+
+// catchall HTML
+app.get("/*", function (req, res) {
+  if (req.originalUrl.includes("favicon")) {
+    res.sendFile(path.join(__dirname, "./public/assets/img", req.originalUrl));
+  } else {
+    const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
+    console.log("DATA OPTIONS", dataOptions);
+    res.render(req.originalUrl.replace("/", ""), dataOptions);
+  }
 });
 
 app.listen(PORT);
