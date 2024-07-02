@@ -5,10 +5,10 @@ body {
 main {
     max-width: 1024px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 0;
     color: #ddd;
     display: grid;
-    grid-template-columns: 60% 35%;
+    grid-template-columns: 60% calc(40% - 12px);
     gap: 24px;
 }
 
