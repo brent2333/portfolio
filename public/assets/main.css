@@ -209,13 +209,12 @@ button:hover {
 }
 
 @media(max-width: 769px) {
-    body {
-        height: 100vh;
-    }
+
     main {
         display: flex;
         flex-wrap: wrap;
         min-height: 100vh;
+        padding: 16px;
     }
     p {
         font-size: 32px;
@@ -229,5 +228,8 @@ button:hover {
     input, textarea {
         max-width: 320px;
     }
+    span.stretch {
+        margin: 32px;
+      }
     
 }
