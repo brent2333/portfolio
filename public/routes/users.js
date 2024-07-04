@@ -4,8 +4,9 @@ const pool = require("../../db");
 
 const usersRouter = express.Router();
 
+const { sendMail } = require("./utils/sendmail");
+
 usersRouter.post("/sendmessage", (request, response) => {
-  console.log("PROCESS", process.env);
   const { name, email, message } = request.fields;
   const created_at = Date.now();
 
@@ -16,6 +17,7 @@ usersRouter.post("/sendmessage", (request, response) => {
       if (error) {
         throw error;
       }
+      sendMail(request.fields);
       response.status(201).send(`message saved with ID: ${results.insertId}`);
     }
   );

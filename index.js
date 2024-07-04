@@ -58,7 +58,6 @@ app.get("/*", function (req, res) {
     res.sendFile(path.join(__dirname, "./public/assets/img", req.originalUrl));
   } else {
     const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
-    console.log("DATA OPTIONS", dataOptions);
     res.render(req.originalUrl.replace("/", ""), dataOptions);
   }
 });
