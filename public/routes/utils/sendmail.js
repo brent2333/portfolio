@@ -1,7 +1,9 @@
 var nodemailer = require("nodemailer");
 const { optionalRequire } = require("optional-require");
 
-const config = optionalRequire("../../../config") || { mail: "", sender: "" };
+const config = optionalRequire("../../../config") || {
+  mail: { senderPass: "", sender: "reasonevidence" },
+};
 
 const sendMail = (data) => {
   const transporter = nodemailer.createTransport({
