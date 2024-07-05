@@ -4,11 +4,12 @@ body {
 
 main {
     max-width: 1024px;
+    width: 90vw;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 32px 16px 16px 16px;
     color: #ddd;
     display: grid;
-    grid-template-columns: 60% calc(40% - 12px);
+    grid-template-columns: 60% calc(40% - 24px);
     gap: 24px;
     position: relative;
 }
@@ -25,6 +26,22 @@ header, footer {
 header {
     display: flex;
     align-content: flex-start;
+    align-content: center;
+}
+
+.ham {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 30px;
+    gap: 3px;
+}
+
+.ham span {
+    display: block;
+    background-color: #000;
+    border-radius: 6px;
+    padding: 4px;
 }
 
 .close-icon {
@@ -45,8 +62,11 @@ header {
     mask-repeat: no-repeat;
     mask-position: top;
     mask-size: 100%;
-    margin-top: 5px;
     border: 4px solid rgba(0,0,0,0.6);
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    align-self: center;
 }
 
 article .photo {
@@ -330,7 +350,6 @@ button:hover {
         padding: 0.5em;
         line-height: 1.6em;
         align-self: center;
-        margin-left: 12px;
         font-size: 20px;
     }
 
@@ -341,7 +360,7 @@ button:hover {
         flex-direction: column;
         position: absolute;
         top: 100%;
-        left: -100%;
+        left: 12px;
         min-width: 260px;
         background-color: #262d40;
         border-radius: 12px;
