@@ -10,6 +10,7 @@ main {
     display: grid;
     grid-template-columns: 60% calc(40% - 12px);
     gap: 24px;
+    position: relative;
 }
 
 header, footer {
@@ -23,6 +24,20 @@ header, footer {
 
 header {
     display: flex;
+    align-content: flex-start;
+}
+
+.close-icon {
+    border-radius: 100%;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.close-icon:after {
+    content: "\2716";
+}
+.close-icon:hover {
+    cursor: pointer;
 }
 
 .round {
@@ -145,6 +160,26 @@ a {
     color: #7e99ed;
 }
 
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: lightblue;
+}
+
+.default-text {
+    color: #ddd;
+
+}
 span.stretch {
     display: inline-block;
     margin: 22px;
@@ -208,6 +243,51 @@ button:hover {
     background-color: #182a20;
 }
 
+#resource-btn-wrap {
+    flex-grow: 3;
+    display: flex;
+    justify-content: flex-end;
+}
+#resource-timing-btn {
+    font-size: 12px;
+    align-self: flex-end;
+}
+
+#resource-data-wrap {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    background-color: rgba(0,0,0,0.7);
+    color: #ccc;
+    border-radius: 12px;
+}
+
+#resource-data-wrap > div {
+    padding: 26px 16px 16px 16px;
+    position: relative;
+}
+ 
+#resource-data-wrap.show {
+    opacity: 1;
+}
+
+#resource-data {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.databox {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #000;
+    font-size: 14px;
+}
+
+
 @media(max-width: 769px) {
 
     main {
@@ -233,3 +313,5 @@ button:hover {
       }
     
 }
+
+

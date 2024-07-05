@@ -18,6 +18,7 @@
         {% endfor %}
         </ul>
     </div>
+    <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Resource Timing Data</button></div>
 </header>
       <main>
       {% block content %}{% endblock %}
@@ -44,36 +45,88 @@
         <button type="submit" class="btn btn-dark">Send Message</button>
     </form>
     </div>
+    </div>
+    <div id="resource-data-wrap">
+      <div>
+      <div class="close-icon"></div>
+      <div id="resource-data"></div>
+    </div>
+    </div>
     </main>
     <footer>
       <p>&copy; Copyright 2024</p>
     </footer>
-    <script>
-      (function() {
-        document.addEventListener("DOMContentLoaded", (event) => {
-          const formBtn = document.getElementById('sign-up-btn');
-          const formWrap = document.querySelectorAll('.form-wrap')[0];
-          formBtn.addEventListener('click', () => {
-            formWrap.classList.add('open-form');
-            formBtn.classList.add('hidden');
-          });
-          const form = document.getElementById('userForm');
-          form.addEventListener('submit', function (event) {
-          event.preventDefault();
-          var data = this;
-          fetch(data.getAttribute('action'), {
-          method: data.getAttribute('method'),
-          body: new FormData(data)
-          }).then(res=>res.text())
-          .then(function (data) {
-              const response = fetch('/thanks').then(res=>res.text())
-              .then(function (data) {
-                formWrap.innerHTML = data;
-              });
-          });
+  <script>
+(async function() {
+
+      const buildPerfString = new Promise((resolve, reject) => {
+        let displayDataString = '';
+        const observer = new PerformanceObserver((list) => {
+           list.getEntries().forEach((entry) => {
+          let isCache ='No';
+          const request = entry.responseStart - entry.requestStart;
+          if (request > 0) {
+            console.log(`${entry.name}: Request time: ${request}ms`);
+            if (entry.transferSize === 0 && entry.decodedBodySize > 0) {
+              isCache = 'Yes';
+            }
+            displayDataString += `<div class="databox">
+              <div class="green"><span class="default-text">Name:</span> ${entry.name.split('/').pop()}</div>
+              <div class="orange"><span class="default-text">Size:</span> ${(entry.transferSize / 8).toFixed(2)} bytes</div>
+              <div class="blue"><span class="default-text">Timing:</span> ${request.toFixed(2)}</div>
+              <div class="red"><span class="default-text">Cache:</span> ${isCache}</div>
+              </div>`;
+          }
+        });
+        resolve(displayDataString);
+        });
+        observer.observe({ type: "resource", buffered: true });
       });
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const perfDataContainer = document.getElementById('resource-data');
+        const perfWrap = document.getElementById('resource-data-wrap');
+        const resourceBtn = document.getElementById('resource-timing-btn');
+        const closeIcon = document.getElementsByClassName('close-icon')[0];
+
+        //form
+        const formBtn = document.getElementById('sign-up-btn');
+        const formWrap = document.querySelectorAll('.form-wrap')[0];
+        formBtn.addEventListener('click', () => {
+          formWrap.classList.add('open-form');
+          formBtn.classList.add('hidden');
+        });
+        const form = document.getElementById('userForm');
+        form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var data = this;
+        fetch(data.getAttribute('action'), {
+        method: data.getAttribute('method'),
+        body: new FormData(data)
+        }).then(res=>res.text())
+        .then(function (data) {
+            const response = fetch('/thanks').then(res=>res.text())
+            .then(function (data) {
+              formWrap.innerHTML = data;
+            });
+        });
     });
-      }())
-  </script>
+
+    // perf
+    Promise.all([buildPerfString]).then((values) => {
+      perfDataContainer.innerHTML = values;
+    });
+
+    // evt bindings
+    resourceBtn.addEventListener('click', () => {
+      perfWrap.classList.add('show');
+      });
+    closeIcon.addEventListener('click',() => {
+      perfWrap.classList.remove('show');
+    });
+
+  });
+}())
+</script>
   </body>
 </html>
