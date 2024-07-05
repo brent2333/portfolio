@@ -59,29 +59,12 @@
   <script>
 (async function() {
 
-      const buildPerfString = new Promise((resolve, reject) => {
-        let displayDataString = '';
-        const observer = new PerformanceObserver((list) => {
-           list.getEntries().forEach((entry) => {
-          let isCache ='No';
-          const request = entry.responseStart - entry.requestStart;
-          if (request > 0) {
-            console.log(`${entry.name}: Request time: ${request}ms`);
-            if (entry.transferSize === 0 && entry.decodedBodySize > 0) {
-              isCache = 'Yes';
-            }
-            displayDataString += `<div class="databox">
-              <div class="green"><span class="default-text">Name:</span> ${entry.name.split('/').pop()}</div>
-              <div class="orange"><span class="default-text">Size:</span> ${(entry.transferSize / 8).toFixed(2)} kB</div>
-              <div class="blue"><span class="default-text">Timing:</span> ${request.toFixed(2)}</div>
-              <div class="red"><span class="default-text">Cache:</span> ${isCache}</div>
-              </div>`;
-          }
-        });
-        resolve(displayDataString);
-        });
+        let perfList;
+        const setPerfList = (list, observer) => {
+          perfList = list.getEntries();
+        }
+        const observer = new PerformanceObserver(setPerfList);
         observer.observe({ type: "resource", buffered: true });
-      });
 
       document.addEventListener("DOMContentLoaded", (event) => {
         const perfDataContainer = document.getElementById('resource-data');
@@ -112,10 +95,28 @@
         });
     });
 
-    // perf
-    Promise.all([buildPerfString]).then((values) => {
-      perfDataContainer.innerHTML = values;
-    });
+    let displayDataString = '';
+      const buildDisplay = () => {
+        if (perfList && perfList.length) {
+          perfList.forEach((entry) => {
+            let isCache ='No';
+            const request = entry.responseStart - entry.requestStart;
+            if (request > 0) {
+              if (entry.transferSize === 0 && entry.decodedBodySize > 0) {
+                isCache = 'Yes';
+              }
+              displayDataString += `<div class="databox">
+                <div class="green"><span class="default-text">Name:</span> ${entry.name.split('/').pop()}</div>
+                <div class="orange"><span class="default-text">Size:</span> ${(entry.transferSize / 8).toFixed(2)} kB</div>
+                <div class="blue"><span class="default-text">Timing:</span> ${request.toFixed(2)}ms</div>
+                <div class="red"><span class="default-text">Cache:</span> ${isCache}</div>
+                </div>`;
+          }
+          });
+          perfDataContainer.innerHTML = displayDataString;
+        }
+      }
+      buildDisplay();
 
     // evt bindings
     resourceBtn.addEventListener('click', () => {
