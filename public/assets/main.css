@@ -296,6 +296,9 @@ button:hover {
         min-height: 100vh;
         padding: 16px;
     }
+    header a {
+        font-size: 14px;
+    }
     p {
         font-size: 32px;
     }
