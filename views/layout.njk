@@ -116,7 +116,9 @@
           perfDataContainer.innerHTML = displayDataString;
         }
       }
-      buildDisplay();
+      setTimeout(() => {
+        buildDisplay();
+      }, 600);
 
     // evt bindings
     resourceBtn.addEventListener('click', () => {
