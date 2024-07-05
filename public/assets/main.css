@@ -103,6 +103,11 @@ header a:not(.logo):hover {
     cursor: pointer;
 }
 
+nav input[type='checkbox'], nav label {
+    display: none;
+}
+
+
 footer p, footer a {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
     font-size: 12px;
@@ -296,9 +301,6 @@ button:hover {
         min-height: 100vh;
         padding: 16px;
     }
-    header a {
-        font-size: 14px;
-    }
     p {
         font-size: 32px;
     }
@@ -315,6 +317,44 @@ button:hover {
         margin: 32px;
       }
     
+}
+
+@media (max-width: 576px) {
+    nav {
+        display: flex;
+        position: relative;
+    }
+    nav label {
+        text-align: left;
+        display: block;
+        padding: 0.5em;
+        line-height: 1.6em;
+        align-self: center;
+        margin-left: 12px;
+        font-size: 20px;
+    }
+
+    input[type='checkbox']:not(:checked)+ul {
+        display: none;
+    }
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        min-width: 260px;
+        background-color: #262d40;
+        border-radius: 12px;
+        padding: 12px;
+        z-index: 99;
+        gap: 20px;
+    }
+    #resource-btn-wrap {
+        align-self: flex-end;
+    }
+    #resource-timing-btn {
+        /* align-self: flex-start; */
+    }
 }
 
 

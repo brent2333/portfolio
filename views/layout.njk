@@ -11,13 +11,18 @@
   <body>
   <header>
     <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
-    <div>
-        <ul>
+        <nav>
+              <!-- The hamburger menu -->
+        <label for='menu' tabindex="0">
+             🍔
+        </label>
+         <input id='menu' type='checkbox' />
+          <ul>
         {% for navItem in navList %}
             <li><a href={{ navItem.url }}>{{ navItem.text }}</a></li>
         {% endfor %}
         </ul>
-    </div>
+      </nav>
     <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Resource Timing Data</button></div>
 </header>
       <main>
