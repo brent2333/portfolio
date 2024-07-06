@@ -94,6 +94,7 @@ article .photo {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .flex-col {
@@ -169,7 +170,7 @@ ul {
 
 form {
     display: flex;
-    gap: 24px;
+    gap: 12px;
     flex-direction: column;
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
@@ -232,6 +233,25 @@ span.stretch {
 
 .form-control {
     flex-grow: 2;
+}
+
+.hoy {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+}
+#namebad, #emailbad {
+    padding: 4px;
+    opacity: 0;
+    color: red;
+    flex-basis: 100%;
+}
+#namebad.show, #emailbad.show {
+    opacity: 1;
 }
 
 label {

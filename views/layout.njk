@@ -40,19 +40,23 @@
       <div class="form-wrap">
         <form id="userForm" method="post" action="/users/sendmessage">
         <div class="flex">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" id="name" name="name" required class="form-control">
+            <label for="name" class="form-label" >Name:</label>
+            <input type="text" id="name" name="name" required required maxlength="20" class="form-control">
+            <span id="namebad">Name is required</span>
         </div>
     
         <div class="flex">
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" required class="form-control">
+            <span id="emailbad">Name is required</span>
         </div>
     
         <div class="flex">
             <label for="message" class="form-label">Message:</label>
             <textarea id="message" name="message" required class="form-control"></textarea>
         </div>
+        <label class="hoy" for="username"></label>
+        <input class="hoy" autocomplete="off" type="text" id="username" name="username" placeholder="Your name here">
     
         <button type="submit" class="btn btn-dark">Send Message</button>
     </form>
@@ -78,6 +82,8 @@
         const perfWrap = document.getElementById('resource-data-wrap');
         const resourceBtn = document.getElementById('resource-timing-btn');
         const closeIcon = document.getElementsByClassName('close-icon')[0];
+        const nameValidation = document.getElementById('namebad');
+        const emailValidation = document.getElementById('emailbad');
 
         //form
         const formBtn = document.getElementById('sign-up-btn');
@@ -89,10 +95,24 @@
         const form = document.getElementById('userForm');
         form.addEventListener('submit', function (event) {
           event.preventDefault();
+          nameValidation.classList.remove('show');
+          emailValidation.classList.remove('show');
           var data = this;
+          const fData = new FormData(data);
+          const nameData = fData.get('name');
+          const nameTest = /^[a-zA-Z]+$/.test(nameData);
+          const usernameData = fData.get('username');
+
+          if (usernameData) {
+            return;
+          }
+          if (nameData === "" || !isNaN(nameData) || !nameTest) {
+            nameValidation.classList.add('show');
+            return;
+          }
           fetch(data.getAttribute('action'), {
           method: data.getAttribute('method'),
-          body: new FormData(data)
+          body: fData
           }).then(res=>res.text())
           .then(function (data) {
               const response = fetch('/thanks').then(res=>res.text())
