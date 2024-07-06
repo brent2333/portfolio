@@ -1,12 +1,16 @@
 const express = require("express");
+var cors = require("cors");
+
 const bodyParser = require("body-parser");
 const formidable = require("express-formidable");
 const path = require("path");
 
 const usersRouter = require("./public/routes/users");
+const weatherRouter = require("./public/routes/weather.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 const { mainNav, pageDataMap } = require("./data/index.js");
 
@@ -28,20 +32,18 @@ app.set("view engine", "njk");
 app.use(express.static(path.join(__dirname, "public")));
 
 const getDataOptions = (url) => {
-  const PageData = { ...mainNav, ...pageDataMap[url] };
+  const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url };
   return PageData;
 };
 
 app.get("/", function (req, res, next) {
-  res.render("index", mainNav);
+  const dataOptions = getDataOptions(req.originalUrl);
+  res.render("index", dataOptions);
 });
 
 // apis
 app.use("/users", usersRouter);
-
-const options = {
-  root: path.join(__dirname),
-};
+app.use("/weather", weatherRouter);
 
 // assets
 app.get("/assets", function (req, res) {

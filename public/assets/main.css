@@ -336,11 +336,8 @@ button:hover {
     span.stretch {
         margin: 32px;
       }
-    
-}
 
-@media (max-width: 576px) {
-    nav {
+      nav {
         display: flex;
         position: relative;
     }
@@ -371,9 +368,7 @@ button:hover {
     #resource-btn-wrap {
         align-self: flex-end;
     }
-    #resource-timing-btn {
-        /* align-self: flex-start; */
-    }
+   
 }
 
 

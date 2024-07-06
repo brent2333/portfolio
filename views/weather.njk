@@ -1,0 +1,75 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<section>
+    <div id="forecast"></div>
+<form id="currentWeatherSearch">
+    <label>Search a Location</label>
+	<input type="text" name="location" placeholder="Location" />
+	<button type="submit">Submit</button>
+</form>
+<div id="current"></div>
+</section>
+<script>
+(async function () {
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+        const forecastBox = document.getElementById('forecast');
+        const currentBox = document.getElementById('current');
+        const buildForecastUI = (data) => {
+            const parsedData = JSON.parse(data);
+            let HTMLString = '';
+            HTMLString += `<h2>Weather Forecast for ${parsedData.location.name}, ${parsedData.location.region}</h2>`;
+            for (const day of parsedData.forecast.forecastday) {
+                HTMLString += `<div class="flex forecast-day">
+                    <span>${day.date}</span>
+                    <span>High: ${day.day.maxtemp_f} °F</span>
+                        <span>Low: ${day.day.mintemp_f} °F</span>
+                            <span class="conditions"><img src="${day.day.condition.icon}" />${day.day.condition.text}</span>
+                    </div>`;
+            }
+            forecastBox.innerHTML = HTMLString;
+        };
+        const getForecast = (ip) => {
+            try {
+                const forecast = fetch(`/weather/forecast?q=${ip}&days=5`).then(res=>res.text())
+                .then(function (data) {
+                    buildForecastUI(data);
+                });
+            } catch (error) {
+                forecastBox.innerHTML = error;
+                console.error(error);
+            }
+        }
+
+        const ipFetch = fetch('/weather/ip').then(res=>res.text())
+                .then(function (data) {
+                    getForecast(data);
+                });
+
+        function onFormSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const location = data.get("location");
+            let HTMLString = '';
+            fetch(`/weather/currentsearch?q=${location}`).then(res=>res.text())
+                .then(function (data) {
+                    const parsedData = JSON.parse(data);
+
+                    HTMLString += `<h2>Weather Forecast for ${parsedData.location.name}, ${parsedData.location.region}</h2>`;
+                    HTMLString += `<div class="flex forecast-day">
+                    <span>Currrent Temp.: ${parsedData.current.temp_f} °F</span>
+                            <span class="conditions"><img src="${parsedData.current.condition.icon}" />${parsedData.current.condition.text}</span>
+                    </div>`;
+                    current.innerHTML = HTMLString;
+                });
+        }
+
+        const form = document.getElementById("currentWeatherSearch");
+        form.addEventListener("submit", onFormSubmit);
+
+});
+})();
+
+</script>
+{% endblock %}

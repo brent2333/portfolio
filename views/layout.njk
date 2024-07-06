@@ -3,6 +3,9 @@
   <head>
     {% block head %}
       <link rel="stylesheet" href="/assets/main.css"/>
+      {% if pageUrl.includes('weather') %}
+      <link rel="stylesheet" href="/assets/weather.css"/>
+      {% endif %}
       <title>
         {% block title %}{% endblock %}Brent Lawson Portfolio</title>
     {% endblock %}
