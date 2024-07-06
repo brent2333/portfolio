@@ -10,16 +10,7 @@ const weatherApiKey =
 const weatherRouter = express.Router();
 
 weatherRouter.get("/ip", (request, response) => {
-  try {
-    fetch(`https://ipapi.co/json?access_key=${ipapiKey}`)
-      .then((res) => res.text())
-      .then(function (data) {
-        response.status(200).send(JSON.parse(data).ip);
-      });
-  } catch (error) {
-    console.error(error);
-    response.send("Sorry, could not fetch your IP");
-  }
+  response.send(ipapiKey);
 });
 
 weatherRouter.get("/forecast", (request, response) => {

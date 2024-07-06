@@ -2,13 +2,13 @@
 
 {% block content %}
 <section>
+    <form id="currentWeatherSearch">
+        <label>Search a Location</label>
+        <input type="text" name="location" placeholder="Location" />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="current"></div>
     <div id="forecast"></div>
-<form id="currentWeatherSearch">
-    <label>Search a Location</label>
-	<input type="text" name="location" placeholder="Location" />
-	<button type="submit">Submit</button>
-</form>
-<div id="current"></div>
 </section>
 <script>
 (async function () {
@@ -41,11 +41,18 @@
                 console.error(error);
             }
         }
-
-        const ipFetch = fetch('/weather/ip').then(res=>res.text())
+        const fetchIpApi = (ipk) => {
+            const ipFetch = fetch(`https://ipapi.co/json?access_key=${ipk}`)
+                .then((res) => res.text())
                 .then(function (data) {
                     getForecast(data);
-                });
+            });
+        }
+
+        fetch('/weather/ip').then(res=>res.text())
+                .then(function (data) {
+                    fetchIpApi(data);
+            });
 
         function onFormSubmit(event) {
             event.preventDefault();

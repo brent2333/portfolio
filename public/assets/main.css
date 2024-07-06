@@ -207,7 +207,7 @@ a {
 }
 span.stretch {
     display: inline-block;
-    margin: 22px;
+    margin: 0 22px 0 22px;
     -webkit-transform: scale(2, 1);
     -moz-transform: scale(2, 1);
     -o-transform: scale(2, 1);
@@ -287,6 +287,7 @@ button:hover {
     background-color: rgba(0,0,0,0.7);
     color: #ccc;
     border-radius: 12px;
+    max-width: 300px;
 }
 
 #resource-data-wrap > div {
@@ -310,6 +311,7 @@ button:hover {
     border-radius: 4px;
     background-color: #000;
     font-size: 14px;
+    overflow: hidden;
 }
 
 
@@ -334,7 +336,7 @@ button:hover {
         max-width: 320px;
     }
     span.stretch {
-        margin: 32px;
+        margin: 0 32px 0 32px;
       }
 
       nav {
