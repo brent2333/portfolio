@@ -63,7 +63,7 @@
                 .then(function (data) {
                     const parsedData = JSON.parse(data);
 
-                    HTMLString += `<h2>Weather Forecast for ${parsedData.location.name}, ${parsedData.location.region}</h2>`;
+                    HTMLString += `<h2>Current Weather for ${parsedData.location.name}, ${parsedData.location.region}</h2>`;
                     HTMLString += `<div class="flex forecast-day">
                     <span>Currrent Temp.: ${parsedData.current.temp_f} °F</span>
                             <span class="conditions"><img src="${parsedData.current.condition.icon}" />${parsedData.current.condition.text}</span>
