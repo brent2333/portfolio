@@ -5,7 +5,7 @@ const config = optionalRequire("../../../config");
 
 const ipapiKey = config?.weather.ipapiKey || process.env.IPAPIKEY;
 const weatherApiKey =
-  config?.weather.weatherApiKey || process.snv.WEATHERAPIKEY;
+  config?.weather.weatherApiKey || process.env.WEATHERAPIKEY;
 
 const weatherRouter = express.Router();
 
