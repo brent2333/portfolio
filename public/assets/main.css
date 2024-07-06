@@ -323,6 +323,11 @@ button:hover {
         min-height: 100vh;
         padding: 16px;
     }
+    
+    header, footer {
+        width: 88vw;
+    }
+
     p {
         font-size: 32px;
     }
