@@ -3,8 +3,9 @@ const { optionalRequire } = require("optional-require");
 
 const config = optionalRequire("../../../config");
 
-const ipapiKey = config.weather.ipapiKey || process.env.IPAPIKEY;
-const weatherApiKey = config.weather.weatherApiKey || process.snv.WEATHERAPIKEY;
+const ipapiKey = config?.weather.ipapiKey || process.env.IPAPIKEY;
+const weatherApiKey =
+  config?.weather.weatherApiKey || process.snv.WEATHERAPIKEY;
 
 const weatherRouter = express.Router();
 
