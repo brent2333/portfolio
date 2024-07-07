@@ -1,9 +1,11 @@
 const express = require("express");
 var cors = require("cors");
+const { optionalRequire } = require("optional-require");
 
 const bodyParser = require("body-parser");
 const formidable = require("express-formidable");
 const path = require("path");
+const { openai } = require("./openai.js");
 
 const usersRouter = require("./public/routes/users");
 const weatherRouter = require("./public/routes/weather.js");
@@ -52,6 +54,32 @@ app.get("/assets", function (req, res) {
       console.error("Error sending asset:", err);
     }
   });
+});
+
+app.get("/dalle-image", async (req, res) => {
+  // Get the text input from the query string
+  const text = req.query.text;
+  // Check if the text is valid
+  if (!text) {
+    // Return an error message if not
+    res.status(400).send("Please provide a text input");
+    return;
+  }
+
+  try {
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: text,
+      n: 1,
+      size: "1024x1024",
+    });
+    image_url = response.data[0].url;
+    res.send(image_url);
+  } catch (error) {
+    // Handle any errors
+    console.error(error);
+    res.status(500).send("Something went wrong with the server");
+  }
 });
 
 // catchall HTML

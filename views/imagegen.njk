@@ -1,0 +1,64 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div id="container">
+    <section>
+    <h1>Generate AI Images</h1>
+<form id="imageform">
+<input id="input" type="text" placeholder="Enter a text description" required>
+<button id="button" type="submit">Generate</button>
+</form>
+<div id="loading"></div>
+<div id="images" class="images"><br/>
+    <img alt="generated" src="" id="dalleresult" />
+</div>
+<script src="scripts/image.js"></script>
+</section>
+<div></div>
+<style>
+    section {
+        min-height: 800px;
+    }
+    #dalleresult {
+        opacity: 0;
+        display: none;
+        transition: opacity 1s ease;
+    }
+    #dalleresult.show {
+        display: block;
+        opacity: 1;
+    }
+    .images {
+        height: 365px;
+        width: 365px;
+    }
+    .images img {
+        max-height: 365px;
+        max-width: 365px;
+    }
+    input {
+        margin: 0 0 12px 0;
+    }
+
+    #loading {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    }
+    #loading.processing {
+        display: inline-block;
+    }
+
+    @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+    }
+</style>
+{% endblock %}

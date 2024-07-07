@@ -23,6 +23,7 @@
     "express-validator": "^7.1.0",
     "nodemailer": "^6.9.14",
     "nunjucks": "^3.2.4",
+    "openai": "^4.52.3",
     "optional-require": "^1.1.8",
     "pg": "^8.12.0"
   }

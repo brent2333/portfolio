@@ -30,7 +30,7 @@
         {% endfor %}
         </ul>
       </nav>
-    <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Resource Timing Data</button></div>
+    <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Resource Data</button></div>
 </header>
       <main>
       {% block content %}{% endblock %}
@@ -145,6 +145,9 @@
         buildDisplay(list.getEntries());
       });
       observer.observe({ type: "resource", buffered: true });
+      setTimeout(() => {
+        observer.disconnect();
+      },1000)
 
     // evt bindings
     resourceBtn.addEventListener('click', () => {
