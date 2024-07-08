@@ -30,7 +30,7 @@
         {% endfor %}
         </ul>
       </nav>
-    <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Resources & Vitals</button></div>
+    <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
 </header>
       <main>
       {% block content %}{% endblock %}
@@ -88,7 +88,7 @@
         let resourceList;
 
         addVitals = (data) => {
-          perfDataContainer.innerHTML = perfDataContainer.innerHTML + `<div>${data.name}: ${data.value.toFixed(2)}, ${data.rating}</div>`
+          perfDataContainer.innerHTML = `<div>${data.name}: ${data.value.toFixed(2)}, ${data.rating}</div>` +perfDataContainer.innerHTML
         };
 
 
