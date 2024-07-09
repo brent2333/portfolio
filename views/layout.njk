@@ -13,7 +13,7 @@
       <title>
         {% block title %}{% endblock %}Brent Lawson Portfolio</title>
     {% endblock %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
     <script src="scripts/theme.js"></script>
   </head>
   <body>
@@ -36,12 +36,17 @@
         </ul>
       </nav>
       <div id="theme-wrap">
-        <span>Select a Theme</span>
         <div id="radio-theme-wrap">
-        <label for="light-theme">Light <input id="light" value="light" name="theme-toggle" type="radio" /></label>
-        <label for="dark-theme">Auto <input id="auto" value="auto" name="theme-toggle" type="radio" /></label>
-          <label for="dark-theme">Dark <input id="dark" value="dark" name="theme-toggle" type="radio" /></label>
-      </div></div>
+        <label for="light"><span>&#9788;</span> <input id="light" value="light" name="theme-toggle" type="radio" /></label>
+        <label for="auto"><input id="auto" value="auto" name="theme-toggle" type="radio" /></label>
+          <label for="dark"><span>&#9789;</span> <input id="dark" value="dark" name="theme-toggle" type="radio" /></label>
+          
+      </div>
+      <div class="visible-picker-wrap">
+        <div class="track"></div>
+        <div class="track-dot"></div>
+    </div>
+    </div>
     <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
 </header>
       <main>

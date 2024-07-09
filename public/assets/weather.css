@@ -1,6 +1,5 @@
 .forecast-day {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
-    background-color: rgba(30, 32, 38, 0.7);
     border-radius: 12px;
     margin-bottom: 12px;
     padding: 12px;
@@ -9,6 +8,15 @@
     max-width: 90%;
     text-align: center;
 }
+.dark .forecast-day {
+    background-color: rgba(30, 32, 38, 0.7);
+}
+
+.light .forecast-day {
+    background-color: rgba(30, 32, 38, 0.2);
+}
+
+
 .forecast-day .conditions {
     flex-basis: 100%;
     justify-content: center;
