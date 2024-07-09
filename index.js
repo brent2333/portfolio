@@ -86,6 +86,10 @@ app.get("/dalle-image", async (req, res) => {
 app.get("/*", function (req, res) {
   if (req.originalUrl.includes("favicon")) {
     res.sendFile(path.join(__dirname, "./public/assets/img", req.originalUrl));
+  } else if (req.originalUrl.includes("robots")) {
+    res.sendFile(path.join(__dirname, "./", req.originalUrl));
+  } else if (req.originalUrl.includes("sitemap")) {
+    res.sendFile(path.join(__dirname, "./", req.originalUrl));
   } else {
     const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
     res.render(req.originalUrl.replace("/", ""), dataOptions);
