@@ -14,9 +14,10 @@
         {% block title %}{% endblock %}Brent Lawson Portfolio</title>
     {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <script src="scripts/theme.js"></script>
   </head>
   <body>
-  <header>
+  <header class="sans-serif">
     <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
         <nav>
               <!-- The hamburger menu -->
@@ -34,6 +35,13 @@
         {% endfor %}
         </ul>
       </nav>
+      <div id="theme-wrap">
+        <span>Select a Theme</span>
+        <div id="radio-theme-wrap">
+        <label for="light-theme">Light <input id="light" value="light" name="theme-toggle" type="radio" /></label>
+        <label for="dark-theme">Auto <input id="auto" value="auto" name="theme-toggle" type="radio" /></label>
+          <label for="dark-theme">Dark <input id="dark" value="dark" name="theme-toggle" type="radio" /></label>
+      </div></div>
     <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
 </header>
       <main>
@@ -42,7 +50,7 @@
         <h3>Get in Touch</h3>
       <button id="sign-up-btn">Send Message</button>
       <div class="form-wrap">
-        <form id="userForm" method="post" action="/users/sendmessage">
+        <form id="userForm"  class="sans-serif" method="post" action="/users/sendmessage">
         <div class="flex">
             <label for="name" class="form-label" >Name:</label>
             <input type="text" id="name" name="name" required required maxlength="20" class="form-control">
@@ -73,7 +81,7 @@
     </div>
     </div>
     </main>
-    <footer>
+    <footer class="sans-serif">
       <p>&copy; Copyright 2024</p>
     </footer>
   <script>

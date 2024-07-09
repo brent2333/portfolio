@@ -1,5 +1,13 @@
-body {
+.dark body {
     background-color: #47506b;
+}
+
+.light  body{
+    background-color: #ddd;
+}
+
+.sans-serif {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
 main {
@@ -25,6 +33,7 @@ header, footer {
 
 header {
     display: flex;
+    gap: 8px;
     align-content: flex-start;
     align-content: center;
 }
@@ -113,7 +122,6 @@ article .photo {
 header a:not(.logo) {
     color: #ddd;
     font-weight: 700;
-    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
     background-color: rgba(30, 32, 38, 0.7);
     padding: 6px 8px;
     border-radius: 4px;
@@ -130,7 +138,6 @@ nav input[type='checkbox'], nav label {
 
 
 footer p, footer a {
-    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
     font-size: 12px;
     color: rgba(135, 146, 199, 0.7);
 }
@@ -172,7 +179,6 @@ form {
     display: flex;
     gap: 12px;
     flex-direction: column;
-    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
 p {
@@ -396,6 +402,43 @@ button:hover {
         align-self: flex-end;
     }
    
+}
+
+#theme-wrap {
+    color: #ddd;
+    padding: 0 10px;
+    flex-grow: 3;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+#theme-wrap span {
+    font-size: 13px;
+}
+
+#radio-theme-wrap {
+    padding-top: 6px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    color: #ddd;
+    font-size: 12px;
+}
+#radio-theme-wrap label {
+    text-align: center;
+    font-weight: 200;
+}
+
+#radio-theme-wrap input {
+    margin: 6px 0 0 0;
+}
+
+/* dark is default */
+@media (prefers-color-scheme: light) {
+    
 }
 
 
