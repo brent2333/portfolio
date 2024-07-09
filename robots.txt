@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brentlawson-webdeveloper.com/sitemap.xml
