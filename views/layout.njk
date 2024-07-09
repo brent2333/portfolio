@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     {% block head %}
-      <link rel="stylesheet" href="/assets/main.css"/>
+    {% if isDev %}
+    <link rel="stylesheet" href="/assets/main.css"/>
+    {% elif not isDev %}
+    <link rel="stylesheet" href="/assets/main.min.css"/>
+    {% endif %}
       {% if pageUrl.includes('weather') %}
       <link rel="stylesheet" href="/assets/weather.css"/>
       {% endif %}

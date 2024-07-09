@@ -34,7 +34,7 @@ app.set("view engine", "njk");
 app.use(express.static(path.join(__dirname, "public")));
 
 const getDataOptions = (url) => {
-  const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url };
+  const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url, isDev };
   return PageData;
 };
 
