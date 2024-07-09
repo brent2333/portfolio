@@ -23,5 +23,12 @@
   <p>I have worked as an individual contributor, team lead and a manager. It feels to me that I have worn many hats since jumping head-first into the wild, weird and <i>sometimes</i> wonderful world of web development.</p>
   <p>Performant, accessible and manageable front-ends is what I would like to create, if the situation can accommodate that.</p>
 </aside>
-
+<script>
+  (async function() {
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const head = document.getElementsByTagName('head');
+      head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="Atlanta, GA based web developer portfolio site. Experienced web professional concerned with performance, accessibility, and user experience.">';
+  });
+  }())
+  </script>
 {% endblock %}

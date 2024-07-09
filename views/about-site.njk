@@ -29,5 +29,12 @@
     {% endfor %}
 </ul>
 </aside>
-
+<script>
+    (async function() {
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const head = document.getElementsByTagName('head');
+        head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="This website is an experiment in returning to simpler ways of creating web frontend that has the least possible unused Javascript and CSS and strives to have good web vitals metrics and is easy to work on with very low overhead and tooling. ExpressJS, PostgreSQL, Nunjucks, plain JavaScript and CSS. It has mostly server-side rendered HTML." />';
+    });
+    }())
+    </script>
 {% endblock %}

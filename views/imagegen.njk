@@ -61,4 +61,12 @@
     to { -webkit-transform: rotate(360deg); }
     }
 </style>
+<script>
+    (async function() {
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const head = document.getElementsByTagName('head');
+        head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="This page displays an AI generatd image using OpenAI DALL-E based on a text prompt." />';
+    });
+    }())
+    </script>
 {% endblock %}

@@ -75,6 +75,9 @@
         const form = document.getElementById("currentWeatherSearch");
         form.addEventListener("submit", onFormSubmit);
 
+        const head = document.getElementsByTagName('head');
+        head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="This page displays the 5-day weather forecast for the location derived from the IP address of the client. It also provides a means to get currenr weather conditions for a country, state or city text search." />';
+
 });
 })();
 

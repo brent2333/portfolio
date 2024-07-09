@@ -32,5 +32,12 @@
     {% endfor %}
 </ul>
 </aside>
-
+<script>
+    (async function() {
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const head = document.getElementsByTagName('head');
+        head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="Atlanta, GA based web developer with 14 years of experience in the industry. User experience focused frontend developer with a professional history of graphic design and ux. React, NextJS, Angular, ExpressJS, Typescript, HTML, CSS/SASS, GitLab, GitHub Actions, OpenShift, Splunk, Figma, Storybook, MongoDB, MYSQL, PostgreSQL, PHP, .NET, Leadership/Mentoring, Agile/Scrum, WCAG, UX/Conversion" />';
+    });
+    }())
+    </script>
 {% endblock %}
