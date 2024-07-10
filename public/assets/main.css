@@ -428,6 +428,7 @@ button:hover {
 #radio-theme-wrap label {
     font-weight: 200;
     height: 32px;
+    width: 40px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -459,13 +460,13 @@ button:hover {
 
 .visible-picker-wrap {
     position: absolute;
-    left: calc(50% - 18px);
+    left: calc(50% - 22px);
     display: flex;
 }
 
 .track {
     height: 16px;
-    width: 38px;
+    width: 44px;
     box-shadow: inset 0 2px 4px 0 #000;
     border-radius: 8px;
     position: relative;
@@ -551,20 +552,31 @@ button:hover {
     input[type='checkbox']:not(:checked)+ul {
         display: none;
     }
+
     nav ul {
         flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: 30px;
         left: 12px;
         min-width: 260px;
-        background-color: #262d40;
         border-radius: 12px;
         padding: 12px;
         z-index: 99;
         gap: 20px;
     }
+
+    .dark nav ul {
+        background-color: #262d40;
+    }
+    .light nav ul {
+        background-color: #aaa;
+    }
+
     #resource-btn-wrap {
         align-self: flex-end;
+    }
+    .visible-picker-wrap {
+        left: calc(50% - 5vw);
     }
 }
 
