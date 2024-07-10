@@ -184,10 +184,19 @@ aside {
 }
 
 details p {
-    background-color: #262d40;
     padding: 16px;
     border-radius: 18px;
 }
+
+.dark details p {
+     background-color: #262d40;
+}
+
+.light details p {
+    background-color: #dccfc7;
+    color: #333;
+}
+
 
 h1, h2, h3, h4, h5 {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
