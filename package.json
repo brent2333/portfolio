@@ -1,7 +1,7 @@
 {
-  "name": "htmx-lawson",
+  "name": "lawson",
   "version": "1.0.0",
-  "description": "htmx-express",
+  "description": "express",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
