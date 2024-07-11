@@ -19,7 +19,7 @@
       <h3>More Posts</h3>
       <ul>
         {% for post in remainderPosts %}
-        <li><div class="post-list sans-serif"><span class="post-title">{{ post.title }}</span><span class="post-date">{{ post.date }}</span></div>
+        <li><div class="post-list sans-serif"><span class="post-title" data-blog-id={{ post.post_id }}>{{ post.title }}</span><span class="post-date">{{ post.date }}</span></div>
     {% endfor %}
       </ul>
     </div>
@@ -40,8 +40,12 @@
   setTimeout(() => {
     const postList = document.querySelectorAll('.post-list');
     for (let i = 0; i < postList.length; i++) {
-    postList[i].addEventListener("click", function() {
-       console.log('CLICKED POST');
+    postList[i].addEventListener("click", function(event) {
+      const pId = event.target.dataset.blogId;
+       const rPosts = fetch(`/posts/remainder/${pId}`).then((res) => res.text())
+                .then(function (data) {
+                    console.log('POST DATA', data);
+            });
      });
     };
   });

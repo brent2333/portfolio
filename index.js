@@ -7,6 +7,7 @@ const { openai } = require("./openai.js");
 const { getPosts } = require("./utils/posts");
 const usersRouter = require("./public/routes/users");
 const weatherRouter = require("./public/routes/weather.js");
+const postsRouter = require("./public/routes/posts.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,6 +48,7 @@ app.get("/", async function (req, res, next) {
 // apis
 app.use("/users", usersRouter);
 app.use("/weather", weatherRouter);
+app.use("/posts", postsRouter);
 
 // assets
 app.get("/assets", function (req, res) {
