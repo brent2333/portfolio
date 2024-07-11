@@ -506,6 +506,46 @@ button:hover {
     
 }
 
+#more-posts {
+    width: 90%;
+}
+
+#more-posts ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+#more-posts ul li {
+    flex-basis: 100%;
+}
+
+#more-posts ul li:hover {
+    cursor: pointer;
+}
+
+.post-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-date {
+    font-size: 11px;
+}
+
+.post-list .post-title {
+    text-overflow: ellipsis;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.dark .post-list .post-title:hover {
+    color: #aaa;
+}
+
+.light .post-list.post-title:hover {
+    color: #5aa278;
+}
 
 @media(max-width: 769px) {
 

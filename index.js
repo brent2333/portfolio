@@ -1,12 +1,10 @@
 const express = require("express");
 var cors = require("cors");
-const { optionalRequire } = require("optional-require");
-
 const bodyParser = require("body-parser");
 const formidable = require("express-formidable");
 const path = require("path");
 const { openai } = require("./openai.js");
-
+const { getPosts } = require("./utils/posts");
 const usersRouter = require("./public/routes/users");
 const weatherRouter = require("./public/routes/weather.js");
 
@@ -38,9 +36,12 @@ const getDataOptions = (url) => {
   return PageData;
 };
 
-app.get("/", function (req, res, next) {
+app.get("/", async function (req, res, next) {
+  const posts = await getPosts();
+  const firstPost = posts[0];
+  const remainderPosts = posts.slice(1, posts.length);
   const dataOptions = getDataOptions(req.originalUrl);
-  res.render("index", dataOptions);
+  res.render("index", { ...dataOptions, firstPost, remainderPosts });
 });
 
 // apis

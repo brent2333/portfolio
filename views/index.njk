@@ -3,18 +3,25 @@
 {% block content %}
 <div id="container">
   <section>
-    <h1>One Web Dev's Perspective</h1>
+    <details>
+      <summary>TL;DR</summary>
+      <p>I've been a dev and a leader for a good number of years touching various tech stacks and in various industries and I may have some relevant things to say about the state of things in Front-End Development. Here's some posts created with my hyper-simple homemade CMS.</p>
+    </details>
+    <h1>{{ firstPost.title }}</h1>
       <div>
-        <details>
-          <summary>TL;DR</summary>
-          <p>I've been a dev and a leader for a good number of years touching various tech stacks and in various industries and I may have some relevant things to say about the state of things in Front-End Development.</p>
-        </details>
         <article>
+          <span class="post-date">Posted on: {{ firstPost.date }}</span>
           <div class="photo"></div>
-        <p>As a self-taught web professional, I feel I have a different perspective than the majority of my peers. Over the last decade, I watched as the Front-End Web Developer community gradually seemed to lose sanity, a preference for simplicity and respect. I am not exactly sure how or when the act of creating User Interfaces lost its direction and focus. The focus should obviously be providing Users with Content and Tools. The Front-End now feels like a place where Back-End or Full-Stack (◔_◔) developers grudgingly work while steamrolling over everything that came before in the space. I seem to recall a time when there was respect for the discipline.</p>
-      <p>I, like everyone else, found React and Angular so very compelling at first. I, like everyone else, scrambled to learn my way around these new tools and extolled the virtues of the "thin-server". It was not very long before I began to see what was being lost and increasingly feel that things were going astray; that an all-pervasive mental disorder had taken over web development.</p>
-      <p>There are already some fine folks out there who have written in detail about the problems with the current state of UI development; the incomprehensible div soup and the hyper-complex architecture. There are many who can speak eloquently about the fact that a framework created for a social media platform that needs to handle massive amounts of concurrent users with massive amounts of dynamic data is not the overarching solution for every single website that is ever created. JavaScript and CSS are not problems to be overcome but are fairly mature technologies that are not perfect <i>but not inherently broken</i> and aim at serving specific and ubiquitous needs. JavaScript may not be an appropriate tool for every aspect of software development and the added complexity to make it so should probably be resisted.</p>
+          {{ firstPost.body | safe }}
     </article>
+    </div>
+    <div id="more-posts">
+      <h3>More Posts</h3>
+      <ul>
+        {% for post in remainderPosts %}
+        <li><div class="post-list sans-serif"><span class="post-title">{{ post.title }}</span><span class="post-date">{{ post.date }}</span></div>
+    {% endfor %}
+      </ul>
     </div>
   </section>
 </div>
@@ -28,6 +35,15 @@
     document.addEventListener("DOMContentLoaded", (event) => {
       const head = document.getElementsByTagName('head');
       head[0].innerHTML = head[0].innerHTML + '<meta name="description" content="Atlanta, GA based web developer portfolio site. Experienced web professional concerned with performance, accessibility, and user experience.">';
+  });
+
+  setTimeout(() => {
+    const postList = document.querySelectorAll('.post-list');
+    for (let i = 0; i < postList.length; i++) {
+    postList[i].addEventListener("click", function() {
+       console.log('CLICKED POST');
+     });
+    };
   });
   }())
   </script>
