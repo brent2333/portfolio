@@ -1,0 +1,14 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div>BLOG POST FORM</div>
+<script>
+    (async function() {
+        const isLoggedIn = sessionStorage.getItem('loggedin');
+        if (!isLoggedIn) {
+            window.location.assign('/');
+        }
+    }())
+
+</script>
+{% endblock %}

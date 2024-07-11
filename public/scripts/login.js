@@ -6,7 +6,12 @@
     loginbtn.addEventListener("click", (event) => {
       loginModal.classList.add("show-login");
     });
-    loginForm.addEventListener("submit", () => {
+    loginModal.addEventListener("click", (event) => {
+      if (event.target.id === "login-modal") {
+        loginModal.classList.remove("show-login");
+      }
+    });
+    loginForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const lFormData = new FormData(loginForm);
       fetch("/users/login", {
@@ -15,7 +20,12 @@
       })
         .then((res) => res.json())
         .then(function (data) {
-          console.log("DATA", data);
+          if (data && data.msg === "Login success") {
+            sessionStorage.setItem("loggedin", true);
+            loginModal.classList.remove("show-login");
+          } else {
+            loginForm.innerHTML = "<p>Sorry your login failed</p>";
+          }
         });
     });
   });

@@ -41,10 +41,20 @@ const getTheUser = (user) =>
 usersRouter.post("/login", async (request, response) => {
   const { user, password } = request.fields;
   const hash = await hashPassword(password);
+
   getTheUser(user)
     .then((user) => {
-      if (comparePassword(user[0].hashedpassword, hash)) {
-        response.status(200).json({ message: "successful login" });
+      if (user[0]) {
+        bcrypt.compare(password, user[0].hashedpassword, (err, data) => {
+          if (err) throw err;
+          if (data) {
+            return response.status(200).json({ msg: "Login success" });
+          } else {
+            return response.status(401).json({ msg: "Invalid credentials" });
+          }
+        });
+      } else {
+        response.status(403).json({ message: "error logging in" });
       }
     })
     .catch((error) => {
