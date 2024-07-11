@@ -88,6 +88,7 @@
     </main>
     <footer class="sans-serif">
       <p>&copy; Copyright 2024</p>
+      <button id="login-btn">Login</button>
     </footer>
   <script>
 (async function() {
@@ -190,5 +191,23 @@
 </script>
 <script src="/scripts/web-vitals.iife.js">
 </script>
+<script src="/scripts/login.js">
+</script>
+<div id="login-modal"><div>
+  <div class="">
+  <form id="ulf" class="sans-serif">
+
+  <div class="flex">
+      <label for="user" class="form-label">Username:</label>
+      <input type="text" id="user" name="user" required class="form-control">
+  </div>
+
+  <div class="flex">
+      <label for="password" class="form-label">Password:</label>
+      <input type="password" id="password" name="password" required class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-dark">Login</button>
+</form></div></div>
   </body>
 </html>
