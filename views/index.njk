@@ -7,12 +7,12 @@
       <summary>TL;DR</summary>
       <p>I've been a dev and a leader for a good number of years touching various tech stacks and in various industries and I may have some relevant things to say about the state of things in Front-End Development. Here's some posts created with my hyper-simple homemade CMS.</p>
     </details>
-    <h1>{{ firstPost.title }}</h1>
+    <h1 id="main-title">{{ firstPost.title }}</h1>
       <div>
         <article>
-          <span class="post-date">Posted on: {{ firstPost.date }}</span>
+          <span id="main-date" class="post-date">Posted on: {{ firstPost.date }}</span>
           <div class="photo"></div>
-          {{ firstPost.body | safe }}
+          <div id="post-body">{{ firstPost.body | safe }}</div>
     </article>
     </div>
     <div id="more-posts">
@@ -39,12 +39,18 @@
 
   setTimeout(() => {
     const postList = document.querySelectorAll('.post-list');
+    const headingOne = document.getElementById('main-title');
+    const postBox = document.getElementById('post-body');
+    const dateBox = document.getElementById('main-date');
     for (let i = 0; i < postList.length; i++) {
     postList[i].addEventListener("click", function(event) {
       const pId = event.target.dataset.blogId;
        const rPosts = fetch(`/posts/remainder/${pId}`).then((res) => res.text())
                 .then(function (data) {
-                    console.log('POST DATA', data);
+                    const parsed = JSON.parse(data);
+                    postBox.innerHTML = parsed.body;
+                    headingOne.innerHTML = parsed.title;
+                    dateBox.innerHTML = parsed.date;
             });
      });
     };
