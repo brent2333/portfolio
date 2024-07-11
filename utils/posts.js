@@ -7,7 +7,6 @@ const getPosts = () => {
         reject(error);
         throw error;
       } else {
-        console.log("$$", typeof results, results.rows);
         if (results.rows) {
           return resolve(results.rows);
         }
