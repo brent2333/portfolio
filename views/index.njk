@@ -17,7 +17,7 @@
     <button id="show-post">Show Full Post</button>
     </div>
     <div id="more-posts">
-      <h3>More Posts</h3>
+      <h3>All Posts</h3>
       <ul>
         {% for post in remainderPosts %}
         <li><div class="post-list sans-serif"><span class="post-title" data-blog-id={{ post.post_id }}>{{ post.title }}</span><span class="post-date">{{ post.date }}</span></div>
@@ -53,6 +53,7 @@
        const rPosts = fetch(`/posts/remainder/${pId}`).then((res) => res.text())
                 .then(function (data) {
                     const parsed = JSON.parse(data);
+                    articleBox[0].classList.remove('show-post');
                     postBox.innerHTML = parsed.body;
                     headingOne.innerHTML = parsed.title;
                     dateBox.innerHTML = parsed.date;

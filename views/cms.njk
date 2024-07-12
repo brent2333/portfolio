@@ -22,7 +22,7 @@
 <script>
     (async function() {
         const isLoggedIn = sessionStorage.getItem('loggedin');
-        if (!isLoggedIn) {
+        if (isLoggedIn === 'false') {
             window.location.assign('/');
         }
     }())

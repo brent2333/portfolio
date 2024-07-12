@@ -6,7 +6,6 @@
     const loginResult = document.getElementById("login-result");
     if (sessionStorage.getItem("loggedin") === "true") {
       loginbtn.innerHTML = "Log Out";
-      loginbtn.dataset.loginState = "loggedin";
     }
     loginbtn.addEventListener("click", (event) => {
       if (sessionStorage.getItem("loggedin") === "true") {
@@ -35,7 +34,6 @@
             sessionStorage.setItem("loggedin", true);
             loginModal.classList.remove("show-login");
             loginbtn.innerHTML = "Log Out";
-            loginbtn.dataset.loginState = "loggedin";
           } else {
             loginResult.innerHTML = "<p>Sorry your login failed</p>";
           }

@@ -535,7 +535,7 @@ button:hover {
 }
 .dark .track-dot {
     background-color: #ddd;
-    left: 23px;
+    left: 30px;
 }
 .light .track-dot {
     background-color: #333;

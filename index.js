@@ -40,7 +40,7 @@ const getDataOptions = (url) => {
 app.get("/", async function (req, res, next) {
   const posts = await getPosts();
   const firstPost = posts[0];
-  const remainderPosts = posts.slice(1, posts.length);
+  const remainderPosts = posts;
   const dataOptions = getDataOptions(req.originalUrl);
   res.render("index", { ...dataOptions, firstPost, remainderPosts });
 });
