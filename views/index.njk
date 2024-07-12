@@ -39,7 +39,8 @@
       const showPostBtn = document.getElementById('show-post');
       const articleBox = document.getElementsByTagName('article');
       showPostBtn.addEventListener('click', function() {
-        articleBox[0].classList.add('show-post');
+        !articleBox[0].classList.contains('show-post') ?
+        articleBox[0].classList.add('show-post') : articleBox[0].classList.remove('show-post')
       });
 
   setTimeout(() => {
