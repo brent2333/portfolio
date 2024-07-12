@@ -30,7 +30,8 @@
       })
         .then((res) => res.json())
         .then(function (data) {
-          if (data && data.msg === "Login success") {
+          if (data) {
+            document.cookie = `jwt=${data.token}`;
             sessionStorage.setItem("loggedin", true);
             loginModal.classList.remove("show-login");
             loginbtn.innerHTML = "Log Out";

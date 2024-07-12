@@ -360,7 +360,7 @@ input, textarea {
     max-width: 480px;
 }
 
-input[type=text], input[type=email] {
+input[type=text], input[type=email], input[type=password] {
     height: 30px;
 }
 

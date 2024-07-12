@@ -8,6 +8,7 @@ const { getPosts } = require("./utils/posts");
 const usersRouter = require("./public/routes/users");
 const weatherRouter = require("./public/routes/weather.js");
 const postsRouter = require("./public/routes/posts.js");
+const { verifyToken, verifyTokenCookie } = require("./middleware/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +37,11 @@ const getDataOptions = (url) => {
   const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url, isDev };
   return PageData;
 };
+
+app.get("/cms", verifyTokenCookie, function (req, res) {
+  const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
+  res.render("cms");
+});
 
 app.get("/", async function (req, res, next) {
   const posts = await getPosts();

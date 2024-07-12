@@ -1,7 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
+const { jwtKey } = require("../../config");
+const jwt = require("jsonwebtoken");
 const pool = require("../../db");
 
 const usersRouter = express.Router();
@@ -39,7 +40,14 @@ usersRouter.post("/login", async (request, response) => {
         bcrypt.compare(password, user[0].hashedpassword, (err, data) => {
           if (err) throw err;
           if (data) {
-            return response.status(200).json({ msg: "Login success" });
+            const token = jwt.sign(
+              { userId: user[0].username },
+              jwtKey || process.env.JWT_SECRET,
+              {
+                expiresIn: "1h",
+              }
+            );
+            return response.status(200).json({ token });
           } else {
             return response.status(401).json({ msg: "Invalid credentials" });
           }
