@@ -604,8 +604,8 @@ button:hover {
 
 #login-modal > div {
     width: 60%;
-    max-width: 900px;
-    height: 500px;
+    max-width: 500px;
+    height: 250px;
     background-color: #ddd;
     color: #333;
     margin: auto;
@@ -635,7 +635,7 @@ button:hover {
     article .photo {
         float: none;
     }
-    #signup {
+    #sendmessage {
         width: 100vw;
     }
     input, textarea {

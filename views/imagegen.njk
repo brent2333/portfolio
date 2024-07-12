@@ -6,13 +6,16 @@
     <h1>Generate AI Images</h1>
 <form id="imageform">
 <input id="input" type="text" placeholder="Enter a text description" required>
+<label class="hoy" for="imageuser"></label>
+<input class="hoy" autocomplete="off" type="text" id="imageuser" name="imageuser" placeholder="Your name here">
 <button id="button" type="submit">Generate</button>
 </form>
 <div id="loading"></div>
+<div id="img-request-message"></div>
 <div id="images" class="images"><br/>
     <img alt="generated" src="" id="dalleresult" />
 </div>
-<script src="scripts/image.js"></script>
+<script src="/scripts/image.js"></script>
 </section>
 <div></div>
 <style>

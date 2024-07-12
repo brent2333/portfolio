@@ -3,8 +3,19 @@
     const loginbtn = document.getElementById("login-btn");
     const loginModal = document.getElementById("login-modal");
     const loginForm = document.getElementById("ulf");
+    const loginResult = document.getElementById("login-result");
+    if (sessionStorage.getItem("loggedin") === "true") {
+      loginbtn.innerHTML = "Log Out";
+      loginbtn.dataset.loginState = "loggedin";
+    }
     loginbtn.addEventListener("click", (event) => {
-      loginModal.classList.add("show-login");
+      if (sessionStorage.getItem("loggedin") === "true") {
+        sessionStorage.setItem("loggedin", false);
+        loginbtn.innerHTML = "Login";
+        return;
+      } else {
+        loginModal.classList.add("show-login");
+      }
     });
     loginModal.addEventListener("click", (event) => {
       if (event.target.id === "login-modal") {
@@ -23,8 +34,10 @@
           if (data && data.msg === "Login success") {
             sessionStorage.setItem("loggedin", true);
             loginModal.classList.remove("show-login");
+            loginbtn.innerHTML = "Log Out";
+            loginbtn.dataset.loginState = "loggedin";
           } else {
-            loginForm.innerHTML = "<p>Sorry your login failed</p>";
+            loginResult.innerHTML = "<p>Sorry your login failed</p>";
           }
         });
     });

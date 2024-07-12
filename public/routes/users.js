@@ -25,14 +25,6 @@ usersRouter.post("/sendmessage", (request, response) => {
   );
 });
 
-const hashPassword = async (plaintextPassword) => {
-  return await bcrypt.hash(plaintextPassword, 10);
-};
-
-const comparePassword = async (plaintextPassword, hash) => {
-  return await bcrypt.compare(plaintextPassword, hash);
-};
-
 const getTheUser = (user) =>
   pool
     .query(`SELECT * FROM users WHERE username = '${user}'`)
@@ -40,7 +32,6 @@ const getTheUser = (user) =>
 
 usersRouter.post("/login", async (request, response) => {
   const { user, password } = request.fields;
-  const hash = await hashPassword(password);
 
   getTheUser(user)
     .then((user) => {
@@ -70,7 +61,6 @@ usersRouter.post("/create", async (request, response) => {
   const hPass = await bcrypt
     .hash(password, saltRounds)
     .then((hash) => {
-      console.log("Hash ", hash);
       return hash;
     })
     .catch((err) => console.error(err.message));

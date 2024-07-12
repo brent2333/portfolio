@@ -14,13 +14,13 @@
         {% block title %}{% endblock %}Brent Lawson Portfolio</title>
     {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-    <script src="scripts/theme.js"></script>
+    <script src="/scripts/theme.js"></script>
   </head>
   <body>
   <header class="sans-serif">
     <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
         <nav>
-              <!-- The hamburger menu -->
+        <!-- The hamburger menu -->
         <label for='menu' tabindex="0">
              <div class="ham">
               <span></span>
@@ -51,7 +51,7 @@
 </header>
       <main>
       {% block content %}{% endblock %}
-      <div id="signup">
+      <div id="sendmessage">
         <h3>Get in Touch</h3>
       <button id="sign-up-btn">Send Message</button>
       <div class="form-wrap">
@@ -88,7 +88,9 @@
     </main>
     <footer class="sans-serif">
       <p>&copy; Copyright 2024</p>
-      <button id="login-btn">Login</button>
+      {% if isDev %}
+      <button id="login-btn" data-login-state="loggedout">Login</button>
+      {% endif %}
     </footer>
   <script>
 (async function() {
@@ -194,7 +196,6 @@
 <script src="/scripts/login.js">
 </script>
 <div id="login-modal"><div>
-  <div class="">
   <form id="ulf" class="sans-serif">
 
   <div class="flex">
@@ -208,6 +209,9 @@
   </div>
 
   <button type="submit" class="btn btn-dark">Login</button>
-</form></div></div>
+  <div id="login-result" class="red"></div>
+</form>
+</div>
+</div>
   </body>
 </html>

@@ -1,7 +1,24 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-<div>BLOG POST FORM</div>
+<div>
+    <form id="blog-post-form" class="sans-serif">
+
+        <div class="flex">
+            <label for="title" class="form-label">Post Title:</label>
+            <input type="text" id="title" name="title" required class="form-control">
+        </div>
+      
+        <div class="flex">
+            <label for="article" class="form-label">Article:</label>
+            <textarea id="article" name="article" required class="form-control"></textarea>
+        </div>
+      
+        <button type="submit" class="btn btn-dark">Post</button>
+      </form>
+      <div id="post-result"></div>
+</div>
+<script src="/scripts/blog.js"></script>
 <script>
     (async function() {
         const isLoggedIn = sessionStorage.getItem('loggedin');
