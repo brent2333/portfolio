@@ -1,16 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-let jwtKey;
-try {
-  if (require.resolve("../../config")) {
-    jwtKey = require("../../config").jwtKey;
-  }
-} catch (e) {
-  console.error("CONFIG is not found");
-  process.exit(e.code);
-}
-
+const { jwtKey } = require("../../config");
 const jwt = require("jsonwebtoken");
 const pool = require("../../db");
 
