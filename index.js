@@ -40,7 +40,7 @@ const getDataOptions = (url) => {
 
 app.get("/cms", verifyTokenCookie, function (req, res) {
   const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
-  res.render("cms");
+  res.render("cms", { pageurl: "/cms" });
 });
 
 app.get("/", async function (req, res, next) {
@@ -66,11 +66,8 @@ app.get("/assets", function (req, res) {
 });
 
 app.get("/dalle-image", async (req, res) => {
-  // Get the text input from the query string
   const text = req.query.text;
-  // Check if the text is valid
   if (!text) {
-    // Return an error message if not
     res.status(400).send("Please provide a text input");
     return;
   }
@@ -85,9 +82,8 @@ app.get("/dalle-image", async (req, res) => {
     image_url = response.data[0].url;
     res.send(image_url);
   } catch (error) {
-    // Handle any errors
     console.error(error);
-    res.status(500).send("Something went wrong with the server");
+    res.status(500).send("Something went wrong with the image server");
   }
 });
 
