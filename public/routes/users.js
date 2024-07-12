@@ -8,7 +8,7 @@ try {
   }
 } catch (e) {
   console.error("CONFIG is not found");
-  process.exit(e.code);
+  // process.exit(e.code);
 }
 
 const jwt = require("jsonwebtoken");
