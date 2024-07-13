@@ -1,10 +1,12 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const { optionalRequire } = require("optional-require");
+
 const saltRounds = 10;
-const { jwtKey } = require("../../config");
+const config = optionalRequire("../../../config");
 const jwt = require("jsonwebtoken");
 const pool = require("../../db");
-
+const jwtKey = config?.jwtKey || null;
 const usersRouter = express.Router();
 
 const { sendMail } = require("./utils/sendmail");
