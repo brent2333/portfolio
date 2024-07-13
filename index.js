@@ -38,9 +38,8 @@ const getDataOptions = (url) => {
   return PageData;
 };
 
-app.get("/cms", verifyTokenCookie, function (req, res) {
-  const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
-  res.render("cms", { pageurl: "/cms" });
+app.get("/cms", function (req, res) {
+  res.render("cms", { pageUrl: "/cms" });
 });
 
 app.get("/", async function (req, res, next) {
