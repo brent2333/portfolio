@@ -1,0 +1,30 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="/assets/guitars.css">
+  <meta name="description" content="">
+
+</head>
+
+<body>
+    <div>
+        {% for guitar in guitarList %}
+            <div class="product list-item">
+                <h3>
+                    {{ guitar.title }}
+                  </h3>
+                  <div class="img-container">
+                      <img src={{guitar.imageUrls[0]}} alt={name} />
+                  </div>
+            
+                </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

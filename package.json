@@ -23,6 +23,8 @@
     "express-formidable": "^1.2.0",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.14",
     "nunjucks": "^3.2.4",
     "openai": "^4.52.3",

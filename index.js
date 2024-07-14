@@ -9,7 +9,7 @@ const usersRouter = require("./public/routes/users");
 const weatherRouter = require("./public/routes/weather.js");
 const postsRouter = require("./public/routes/posts.js");
 const { verifyToken, verifyTokenCookie } = require("./middleware/auth");
-
+const { getGuitars } = require("./utils/amazon.js");
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
@@ -37,6 +37,19 @@ const getDataOptions = (url) => {
   const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url, isDev };
   return PageData;
 };
+
+const getGuitarData = async () => {
+  const data = await getGuitars();
+  const mapped = data.map(
+    (guitar) => (guitar.productdata = JSON.parse(guitar.productdata))
+  );
+  return mapped;
+};
+
+app.get("/guitars", async function (req, res) {
+  const guitarsFromDB = await getGuitarData();
+  res.render("guitars", { guitarList: guitarsFromDB });
+});
 
 app.get("/cms", function (req, res) {
   res.render("cms", { pageUrl: "/cms" });
