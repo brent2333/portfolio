@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const { optionalRequire } = require("optional-require");
 const config = optionalRequire("../../../config");
-let canopyapiKey = config.canopyapiKey || process.env.CANOPYAPI_KEY;
+let canopyapiKey = config?.canopyapiKey || process.env.CANOPYAPI_KEY;
 const pool = require("../db");
 
 const sortProducts = (list) => {
