@@ -15,7 +15,7 @@
         {% for guitar in guitarList %}
             <div class="product list-item">
                 <h3>
-                    {{ guitar.title }}
+                    {{ guitar.title }} <span>{{ guitar.retailer }}</span>
                   </h3>
                   <div class="img-container">
                       <img src={{guitar.imageUrls[0]}} alt={name} />

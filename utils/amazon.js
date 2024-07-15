@@ -54,7 +54,6 @@ query amazonProduct {
 }`;
 
 const fetchGuitars = async () => {
-  console.log("GET GUITARS", canopyapiKey, query);
   try {
     await fetch("https://graphql.canopyapi.co", {
       method: "POST",
@@ -69,8 +68,11 @@ const fetchGuitars = async () => {
       .then((res) => {
         const resJson = JSON.parse(res);
         const products = resJson.data.amazonProductSearchResults.productResults;
-        if (products && Array.isArray(products.results)) {
-          insertGuitars(products.results);
+        const RetailerMap = products.results.map((p) => {
+          return { ...p, retailer: "amazon" };
+        });
+        if (RetailerMap && Array.isArray(RetailerMap)) {
+          insertGuitars(RetailerMap);
         }
       });
   } catch (error) {
