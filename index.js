@@ -40,10 +40,7 @@ const getDataOptions = (url) => {
 
 const getGuitarData = async () => {
   const data = await getGuitars();
-  const mapped = data.map(
-    (guitar) => (guitar.productdata = JSON.parse(guitar.productdata))
-  );
-  return mapped;
+  return data;
 };
 
 app.get("/guitars", async function (req, res) {

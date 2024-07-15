@@ -4,6 +4,24 @@ const config = optionalRequire("../../../config");
 let canopyapiKey = config.canopyapiKey || process.env.CANOPYAPI_KEY;
 const pool = require("../db");
 
+const sortProducts = (list) => {
+  for (const g of list) {
+    g.productdata = JSON.parse(g.productdata);
+    g.displayImage = g.productdata.imageUrls[0];
+  }
+  const amazonProducts = list.filter(
+    (product) => product.productdata.retailer === "amazon"
+  );
+  const gcProducts = list.filter(
+    (product) => product.productdata.retailer === "gc"
+  );
+
+  const merged = [amazonProducts, gcProducts]
+    .reduce((r, a) => (a.forEach((a, i) => (r[i] = r[i] || []).push(a)), r), [])
+    .reduce((a, b) => a.concat(b));
+  return merged;
+};
+
 const getGuitars = () => {
   return new Promise((resolve, reject) => {
     pool.query("SELECT * FROM guitars", (error, results) => {
@@ -11,9 +29,9 @@ const getGuitars = () => {
         console.log("ERROR", error);
         reject(error);
       }
-      // console.log("SUCCESSFUL GET", results.rows.slice(0, 9));
       if (results.rows) {
-        return resolve(results.rows);
+        const sortedProducts = sortProducts(results.rows);
+        return resolve(sortedProducts);
       }
     });
   });

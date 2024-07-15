@@ -15,12 +15,11 @@
         {% for guitar in guitarList %}
             <div class="product list-item">
                 <h3>
-                    {{ guitar.title }} <span>{{ guitar.retailer }}</span>
+                    {{ guitar.productdata.title }} <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/{{ guitar.productdata.retailer }}.png" /></div>
                   </h3>
                   <div class="img-container">
-                      <img src={{guitar.imageUrls[0]}} alt={name} />
+                      <img src={{guitar.displayImage}} alt={name} />
                   </div>
-            
                 </div>
         {% endfor %}
     </div>
