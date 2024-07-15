@@ -45,7 +45,18 @@ const getGuitarData = async () => {
 
 app.get("/guitars", async function (req, res) {
   const guitarsFromDB = await getGuitarData();
-  res.render("guitars", { guitarList: guitarsFromDB });
+  const lengthDivide = guitarsFromDB.length / 18;
+  const count = Math.ceil(lengthDivide);
+  res.render("guitars", {
+    guitarList: guitarsFromDB.slice(0, 18),
+    pageCount: count,
+    pageUrl: "/guitars",
+  });
+});
+
+app.get("/guitardata", async function (req, res) {
+  const guitarsFromDB = await getGuitarData();
+  res.json(guitarsFromDB);
 });
 
 app.get("/cms", function (req, res) {

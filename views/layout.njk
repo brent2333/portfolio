@@ -10,6 +10,9 @@
       {% if pageUrl.includes('weather') %}
       <link rel="stylesheet" href="/assets/weather.css"/>
       {% endif %}
+      {% if pageUrl.includes('guitars') %}
+      <link rel="stylesheet" href="/assets/guitars.css"/>
+      {% endif %}
       <title>
         {% block title %}{% endblock %}{% if metaTitle %}{{ metaTitle }}{% endif %} | Brent Lawson Portfolio</title>
     {% endblock %}

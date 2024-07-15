@@ -11,19 +11,163 @@
 </head>
 
 <body>
+    <header>
+        <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
+
+        <h1 class="sans-serif">Electric Solid-Body Guitar Shopping Aggregator</h1>
+        <div id="guitar-btns">
+            <button><a href="/" id="how-made">How It's Made</a></button>
+            <button><a href="/">Back to Main Site</a></button>
+        </div>
+        <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
+    </header>
+    <main>
     <div>
+    <div id="product-grid-wrapper">
         {% for guitar in guitarList %}
-            <div class="product list-item">
-                <h3>
-                    {{ guitar.productdata.title }} <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/{{ guitar.productdata.retailer }}.png" /></div>
-                  </h3>
-                  <div class="img-container">
-                      <img src={{guitar.displayImage}} alt={name} />
-                  </div>
+            <div class="product list-item sans-serif">
+                <div class="product-img-container">
+                    <img src={{guitar.displayImage}} alt={name} />
+                    <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/{{ guitar.productdata.retailer }}.png" /></div>
+                </div>
+                <div class="product-details-container sans-serif">
+                    <a href={{ guitar.productdata.url }} target="_blank"><h3>
+                        {{ guitar.productdata.title }}
+                      </h3></a>
+                      <div class="product-price">{{ guitar.productdata.price.value }}</div>
+                </div>
                 </div>
         {% endfor %}
+        </div>
+        <div class="paginator"><button class="pag-btn" id="left-p-btn">&larr;</button><div>Page <span id="current-page"></span> of <span>{{ pageCount }}</span></div><button class="pag-btn" id="right-p-btn">&rarr;</button></div>
     </div>
+    <div id="resource-data-wrap">
+        <div>
+        <div class="close-icon"></div>
+        <div id="resource-data"></div>
+      </div>
+      </div>
+</main>
+    <footer class="sans-serif">
+        <p>&copy; Copyright 2024</p>
+      </footer>
+      <script src="/scripts/web-vitals.iife.js">
+    </script>
+<script id="ddump"></script>
+<script>
 
+    (async function() {
+        const createProductCards = (gridItems) => {
+            const productHTMLs = gridItems.map((gItem) => {
+                return `<div class="product list-item sans-serif">
+                <div class="product-img-container">
+                    <img src=${gItem.displayImage} alt={name} />
+                    <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer }.png" /></div>
+                </div>
+                <div class="product-details-container sans-serif">
+                    <h3>
+                        ${gItem.productdata.title }
+                      </h3>
+                      <div class="product-price">${gItem.productdata.price.value }</div>
+                </div>
+                </div>`;
+            });
+            return productHTMLs.join('');
+        }
+        const chunk = (arr, size) => arr.reduce((carry, _, index, orig) => !(index % size) ? carry.concat([orig.slice(index,index+size)]) : carry, []);
+        document.addEventListener("DOMContentLoaded", (event) => {
+            const perfDataContainer = document.getElementById('resource-data');
+        const perfWrap = document.getElementById('resource-data-wrap');
+        const resourceBtn = document.getElementById('resource-timing-btn');
+        const closeIcon = document.getElementsByClassName('close-icon')[0];
+        const nameValidation = document.getElementById('namebad');
+        const emailValidation = document.getElementById('emailbad');
+        let resourceList;
+
+        addVitals = (data) => {
+          perfDataContainer.innerHTML = `<div>${data.name}: ${data.value.toFixed(2)}, ${data.rating}</div>` +perfDataContainer.innerHTML
+        };
+
+        resourceBtn.addEventListener('click', () => {
+      perfWrap.classList.add('show');
+      });
+    closeIcon.addEventListener('click',() => {
+      perfWrap.classList.remove('show');
+    });
+
+
+        const ttfb = webVitals.onTTFB(addVitals);
+        const fid = webVitals.onFID(addVitals);
+        const lcp = webVitals.onLCP(addVitals);
+
+            const howBtn = document.getElementById("how-made");
+            const howModal = document.getElementById("how-modal");
+            const pGridWrap = document.getElementById("product-grid-wrapper");
+            const databox = document.getElementById("ddump");
+            const currPage = document.getElementById("current-page");
+            const lPagBtn = document.getElementById("left-p-btn");
+            const rPagBtn = document.getElementById("right-p-btn");
+            let pData;
+            let parsed;
+            let chunkLength;
+            const trimProductList = async (currPageVal) => {
+                const gridItems = chunkedProducts[currPageVal - 1];
+                const newHTML = await createProductCards(gridItems);
+                pGridWrap.innerHTML = newHTML;
+            }
+            let currPageVal = 1;
+
+            lPagBtn.addEventListener('click', (event) => {
+                if (currPageVal > 1) {
+                    currPageVal -= 1;
+                    currPage.innerHTML = currPageVal;
+                    if (currPageVal > 0) {
+                        trimProductList(currPageVal);
+                    }
+                }
+            });
+            rPagBtn.addEventListener('click', (event) => {
+                currPageVal += 1;
+                if (currPageVal <= chunkLength) {
+                    currPage.innerHTML = currPageVal; 
+                    trimProductList(currPageVal); 
+                } else {
+                    currPageVal -= 1;
+                }
+            });
+            currPage.innerHTML = currPageVal;
+            fetch('/guitardata').then((res) => res.text())
+                .then(function (data) {
+                    databox.innerHTML = data;
+                    pData = databox.innerHTML;
+                    parsed = JSON.parse(pData);
+                    chunkLength = Math.ceil(parsed.length / 18);
+                    chunkedProducts = chunk(parsed, 18);
+            });
+            howBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                howModal.classList.add('show-how')
+            });
+            howModal.addEventListener("click", (event) => {
+                console.log("@*E^%ET&*WUYDEGUYHWD", event.target.id)
+            if (event.target.id === "how-modal") {
+                howModal.classList.remove("show-how");
+            }
+    });
+    });
+}());
+</script>
+<div id="how-modal">
+    <div>
+        <h3>How it's Made</h3>
+        <p>I fully realize that this is not some impressive architecture or UX right now and that some developers would be deeply triggered and/or offended at a lot of it 😂. I cut corners where it didn't matter to me and didn't contribute much to the goal. Cleanup will happen, however 😉. I also realize this would not scale easily without some enhancements. I am simply putting my money where my mouth is when it comes to JS bloat and building things simply. It demonstrates accomplishing some common asks of business in a web app as simply as possible. You can see the performance of the super low-code implementation. Another goal was to see just how quickly I could build something from scratch using the bare minimum npm modules. A compare tool and other additions are upcoming.</p>
+        <h3>Back End</h3>
+        <p>I have a cron-job on the ExpressJS Web Service to fetch Amazon data using <a href="https://www.canopyapi.co/" target="_blank">Canopy</a> every 24 hours. In order to show data aggregation across retailers, I scraped Guitar Center for some products and put them in the DB. When the page is requested, the products are retrieved from a route, merged/sorted, and chunked, with the first 18 rendered in page, a common ask for SEO purposes.</p>
+        <h3>Front End</h3>
+        <p>No Framework. Plain JS & CSS.</p>
+        <p>The entire JSON product list is fetched and put in a script tag. The bare-bones paginator is populated according to the chunks and total list. When the paginator is used, the appropriate product chunk is retrieved from the JSON, templated with simple string interploation and the innerHTML is replaced in the product grid wrapper.</p>
+    </div>
+</div>
 </body>
 
 </html>
