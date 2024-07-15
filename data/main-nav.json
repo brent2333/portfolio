@@ -3,7 +3,6 @@
       { "text": "About Me", "url": "/about-me" },
       { "text": "About This Site", "url": "/about-site" },
       { "text": "Weather", "url": "/weather" },
-      { "text": "AI Image Gen", "url": "/imagegen" },
-      { "text": "Guitar Shopping", "url": "/guitars" }
+      { "text": "AI Image Gen", "url": "/imagegen" }
     ]
   }
