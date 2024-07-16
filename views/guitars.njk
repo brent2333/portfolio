@@ -14,12 +14,12 @@
     <header>
         <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
 
-        <h1 class="sans-serif">Electric Solid-Body Guitar Shopping Aggregator</h1>
+        <h1 class="sans-serif">Electric Guitar Shopping Aggregator</h1>
         <div id="guitar-btns">
             <button><a href="/" id="how-made">How It's Made</a></button>
-            <button><a href="/">Back to Main Site</a></button>
+        <button id="resource-timing-btn">Show Vitals & Resources </button>
+
         </div>
-        <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
     </header>
     <main>
     <div>
@@ -65,9 +65,9 @@
                     <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer }.png" /></div>
                 </div>
                 <div class="product-details-container sans-serif">
-                    <h3>
+                    <a href=${gItem.productdata.url} target="_blank"><h3>
                         ${gItem.productdata.title }
-                      </h3>
+                      </h3></a>
                       <div class="product-price">${gItem.productdata.price.value }</div>
                 </div>
                 </div>`;
@@ -159,6 +159,7 @@
 </script>
 <div id="how-modal">
     <div>
+        <article>
         <h3>How it's Made</h3>
         <p>I fully realize that this is not some impressive architecture or UX right now and that some developers would be deeply triggered and/or offended at a lot of it 😂. I cut corners where it didn't matter to me and didn't contribute much to the goal. Cleanup will happen, however 😉. I also realize this would not scale easily without some enhancements. I am simply putting my money where my mouth is when it comes to JS bloat and building things simply. It demonstrates accomplishing some common asks of business in a web app as simply as possible. You can see the performance of the super low-code implementation. Another goal was to see just how quickly I could build something from scratch using the bare minimum npm modules. A compare tool and other additions are upcoming.</p>
         <h3>Back End</h3>
@@ -166,6 +167,8 @@
         <h3>Front End</h3>
         <p>No Framework. Plain JS & CSS.</p>
         <p>The entire JSON product list is fetched and put in a script tag. The bare-bones paginator is populated according to the chunks and total list. When the paginator is used, the appropriate product chunk is retrieved from the JSON, templated with simple string interploation and the innerHTML is replaced in the product grid wrapper.</p>
+    </article>
+
     </div>
 </div>
 </body>
