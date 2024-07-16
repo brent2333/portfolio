@@ -125,6 +125,7 @@
                         trimProductList(currPageVal);
                     }
                 }
+                window.scrollTo({top: 0, behavior: 'smooth'});
             });
             rPagBtn.addEventListener('click', (event) => {
                 currPageVal += 1;
@@ -134,6 +135,7 @@
                 } else {
                     currPageVal -= 1;
                 }
+                window.scrollTo({top: 0, behavior: 'smooth'});
             });
             currPage.innerHTML = currPageVal;
             fetch('/guitardata').then((res) => res.text())
@@ -149,7 +151,6 @@
                 howModal.classList.add('show-how')
             });
             howModal.addEventListener("click", (event) => {
-                console.log("@*E^%ET&*WUYDEGUYHWD", event.target.id)
             if (event.target.id === "how-modal") {
                 howModal.classList.remove("show-how");
             }
