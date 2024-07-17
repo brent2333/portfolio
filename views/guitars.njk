@@ -38,6 +38,8 @@
                 </form>
             </div>
           </header>
+          <div id="no-products">Sorry, no products on this page for that retailer. <button id="back-btn">back</button></div>
+
     <div id="product-grid-wrapper">
         {% for guitar in guitarList %}
             <div class="product list-item sans-serif">
@@ -157,6 +159,8 @@
             const lPagBtn = document.getElementById("left-p-btn");
             const rPagBtn = document.getElementById("right-p-btn");
             const retailerFilter = document.getElementById("retailers");
+            const noProductsMesssage = document.getElementById("no-products");
+            const backBtn = document.getElementById("back-btn");
 
             let pData;
             let parsed;
@@ -167,12 +171,20 @@
                 if (filterVal) {
                     gridItems = gridItems.filter((item) => item.productdata.retailer == filterVal);
                 }
-                const newHTML = await createProductCards(gridItems);
-                pGridWrap.innerHTML = newHTML;
+                if (!gridItems.length) {
+                    noProductsMesssage.classList.add('show');
+                    pGridWrap.innerHTML = `<div>¯/\_(ツ)_/¯</div>`;
+                } else {
+                    const newHTML = await createProductCards(gridItems);
+                    pGridWrap.innerHTML = newHTML;
+                }
             }
             let currPageVal = 1;
+            currPage.innerHTML = currPageVal;
+
 
             lPagBtn.addEventListener('click', (event) => {
+                noProductsMesssage.classList.remove('show');
                 if (currPageVal > 1) {
                     currPageVal -= 1;
                     currPage.innerHTML = currPageVal;
@@ -183,6 +195,7 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
             rPagBtn.addEventListener('click', (event) => {
+                noProductsMesssage.classList.remove('show');
                 currPageVal += 1;
                 if (currPageVal <= chunkLength) {
                     currPage.innerHTML = currPageVal; 
@@ -192,7 +205,18 @@
                 }
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
-            currPage.innerHTML = currPageVal;
+            backBtn.addEventListener('click', () => {
+                noProductsMesssage.classList.remove('show');
+                if (currPageVal > 1) {
+                    currPageVal -= 1;
+                    currPage.innerHTML = currPageVal;
+                    if (currPageVal > 0) {
+                        trimProductList(currPageVal);
+                    }
+                }
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+ 
             fetch('/guitardata').then((res) => res.text())
                 .then(function (data) {
                     databox.innerHTML = data;
@@ -203,11 +227,11 @@
             });
             howBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                howModal.classList.add('show-how')
+                howModal.classList.add('show')
             });
             howModal.addEventListener("click", (event) => {
             if (event.target.id === "how-modal") {
-                howModal.classList.remove("show-how");
+                howModal.classList.remove("show");
             }
     });
 
@@ -219,7 +243,7 @@
                 const newHTML = await createProductCards(newGrid);
                 pGridWrap.innerHTML = newHTML;
             } else {
-                pGridWrap.innerHTML = `<div style="flex-basis:100%;text-align:center;color:red">No Products on this page for that Retailer</div>` + pGridWrap.innerHTML;
+                noProductsMesssage.classList.add("show");
             }
         } else {
             const gridItems = chunkedProducts[currPageVal - 1];

@@ -151,6 +151,18 @@ h1 {
     justify-content: center;
 }
 
+#no-products {
+    opacity: 0;
+    flex-basis:100%;
+    text-align:center;
+    color:red;
+    padding-top: 14px;
+}
+
+#no-products.show {
+    opacity: 1;
+}
+
 .product {
     flex-basis: calc(33.33% - 48px);
     display: flex;
@@ -241,7 +253,7 @@ h3 {
     display: none;
     padding-top: 24px;
 }
-#how-modal.show-how {
+#how-modal.show {
     display: block;
 }
 
