@@ -194,6 +194,7 @@ h3 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    padding-top: 24px;
 }
 
 .product-img-container img {

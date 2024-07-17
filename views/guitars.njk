@@ -156,12 +156,17 @@
             const currPage = document.getElementById("current-page");
             const lPagBtn = document.getElementById("left-p-btn");
             const rPagBtn = document.getElementById("right-p-btn");
-            const retailerFilter = document.getElementById("retailer");
+            const retailerFilter = document.getElementById("retailers");
+
             let pData;
             let parsed;
             let chunkLength;
             const trimProductList = async (currPageVal) => {
-                const gridItems = chunkedProducts[currPageVal - 1];
+                const filterVal = retailerFilter.value;
+                let gridItems = chunkedProducts[currPageVal - 1];
+                if (filterVal) {
+                    gridItems = gridItems.filter((item) => item.productdata.retailer == filterVal);
+                }
                 const newHTML = await createProductCards(gridItems);
                 pGridWrap.innerHTML = newHTML;
             }
@@ -210,8 +215,12 @@
         if (this.value) {
             const gridItems = chunkedProducts[currPageVal - 1];
             const newGrid = gridItems.filter((item) => item.productdata.retailer == this.value);
-            const newHTML = await createProductCards(newGrid);
-            pGridWrap.innerHTML = newHTML;
+            if (newGrid.length) {
+                const newHTML = await createProductCards(newGrid);
+                pGridWrap.innerHTML = newHTML;
+            } else {
+                pGridWrap.innerHTML = `<div style="flex-basis:100%;text-align:center;color:red">No Products on this page for that Retailer</div>` + pGridWrap.innerHTML;
+            }
         } else {
             const gridItems = chunkedProducts[currPageVal - 1];
             const newHTML = await createProductCards(gridItems);
