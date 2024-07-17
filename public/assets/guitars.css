@@ -40,6 +40,7 @@ select {
     grid-template-areas: "select";
     align-items: center;
     position: relative;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
   }
 
   select,
@@ -147,6 +148,7 @@ h1 {
     flex-wrap: wrap;
     gap: 16px;
     padding: 32px 24px;
+    justify-content: center;
 }
 
 .product {
