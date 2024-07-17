@@ -16,13 +16,28 @@
 
         <h1 class="sans-serif">Electric Guitar Shopping Aggregator</h1>
         <div id="guitar-btns">
-            <button><a href="/" id="how-made">How It's Made</a></button>
+            <button id="how-made">How It's Made</button>
         <button id="resource-timing-btn">Show Vitals & Resources </button>
 
         </div>
     </header>
     <main>
     <div>
+        <header id="search-filters">
+            <div>
+                <form id="grid-filters">
+                    <label for="retailers" class="sans-serif">Filter By Retailer</label>
+                    <div class="select">
+                    <select name="retailers" id="retailers">
+                        <option value="">Select a Retailer</option>
+                        <option value="amazon">Amazon</option>
+                        <option value="gc">Guitar Center</option>
+                    </select>
+                    <span class="focus"></span>
+                </div>
+                </form>
+            </div>
+          </header>
     <div id="product-grid-wrapper">
         {% for guitar in guitarList %}
             <div class="product list-item sans-serif">
@@ -31,11 +46,13 @@
                     <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/{{ guitar.productdata.retailer }}.png" /></div>
                 </div>
                 <div class="product-details-container sans-serif">
-                    <a href={{ guitar.productdata.url }} target="_blank"><h3>
+                    <div class="product-title">
+                        <a href={{ guitar.productdata.url }} target="_blank"><h3>
                         {{ guitar.productdata.title }}
                       </h3></a>
-                      <div class="product-price">{{ guitar.productdata.price.value }}</div>
+                      </div>
                 </div>
+                <div class="product-price">{{ guitar.productdata.price.value }}</div>
                 </div>
         {% endfor %}
         </div>
@@ -57,6 +74,10 @@
 <script>
 
     (async function() {
+
+
+        let displayDataString = '';
+
         const createProductCards = (gridItems) => {
             const productHTMLs = gridItems.map((gItem) => {
                 return `<div class="product list-item sans-serif">
@@ -75,30 +96,58 @@
             return productHTMLs.join('');
         }
         const chunk = (arr, size) => arr.reduce((carry, _, index, orig) => !(index % size) ? carry.concat([orig.slice(index,index+size)]) : carry, []);
+
         document.addEventListener("DOMContentLoaded", (event) => {
             const perfDataContainer = document.getElementById('resource-data');
-        const perfWrap = document.getElementById('resource-data-wrap');
-        const resourceBtn = document.getElementById('resource-timing-btn');
-        const closeIcon = document.getElementsByClassName('close-icon')[0];
-        const nameValidation = document.getElementById('namebad');
-        const emailValidation = document.getElementById('emailbad');
-        let resourceList;
+            const perfWrap = document.getElementById('resource-data-wrap');
+            const resourceBtn = document.getElementById('resource-timing-btn');
+            const closeIcon = document.getElementsByClassName('close-icon')[0];
+            let resourceList;
 
         addVitals = (data) => {
           perfDataContainer.innerHTML = `<div>${data.name}: ${data.value.toFixed(2)}, ${data.rating}</div>` +perfDataContainer.innerHTML
         };
 
         resourceBtn.addEventListener('click', () => {
-      perfWrap.classList.add('show');
-      });
-    closeIcon.addEventListener('click',() => {
-      perfWrap.classList.remove('show');
-    });
+            perfWrap.classList.add('show');
+        });
+        closeIcon.addEventListener('click',() => {
+            perfWrap.classList.remove('show');
+        });
 
+    const buildDisplay = (list) => {
+        if (list && list.length) {
+          list.forEach((entry) => {
+            let isCache ='<span class="red">No</span>';
+            const request = entry.responseStart - entry.requestStart;
+            if (request > 0) {
+              if (entry.deliveryType === 'cache') {
+                isCache = '<span class="green">Yes</span>';
+              }
+              displayDataString += `<div class="databox">
+                <div class="green"><span class="default-text">Name:</span> ${entry.name.split('/').pop()}</div>
+                <div class="orange"><span class="default-text">Size:</span> ${(entry.decodedBodySize / 1000).toFixed(2)} KB</div>
+                <div class="blue"><span class="default-text">Timing:</span> ${request.toFixed(2)}ms</div>
+                <div><span class="default-text">Cache:</span> ${isCache}</div>
+                </div>`;
+          }
+          });
+          perfDataContainer.innerHTML = displayDataString;
+        }
+      }
 
         const ttfb = webVitals.onTTFB(addVitals);
         const fid = webVitals.onFID(addVitals);
         const lcp = webVitals.onLCP(addVitals);
+
+        const observer = new PerformanceObserver((list) => {
+        resourceList = list.getEntries();
+        buildDisplay(resourceList);
+      });
+      observer.observe({ type: "resource", buffered: true });
+      setTimeout(() => {
+        observer.disconnect();
+      },1000);
 
             const howBtn = document.getElementById("how-made");
             const howModal = document.getElementById("how-modal");
@@ -107,6 +156,7 @@
             const currPage = document.getElementById("current-page");
             const lPagBtn = document.getElementById("left-p-btn");
             const rPagBtn = document.getElementById("right-p-btn");
+            const retailerFilter = document.getElementById("retailer");
             let pData;
             let parsed;
             let chunkLength;
@@ -155,6 +205,20 @@
                 howModal.classList.remove("show-how");
             }
     });
+
+    document.getElementById('retailers').onchange = async function(){
+        if (this.value) {
+            const gridItems = chunkedProducts[currPageVal - 1];
+            const newGrid = gridItems.filter((item) => item.productdata.retailer == this.value);
+            const newHTML = await createProductCards(newGrid);
+            pGridWrap.innerHTML = newHTML;
+        } else {
+            const gridItems = chunkedProducts[currPageVal - 1];
+            const newHTML = await createProductCards(gridItems);
+            pGridWrap.innerHTML = newHTML;
+        }
+    };
+
     });
 }());
 </script>
