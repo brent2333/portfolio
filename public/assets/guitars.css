@@ -286,7 +286,7 @@ h3 {
 #resource-data-wrap {
     position: absolute;
     top: 16px;
-    right: 0;
+    right: 100%;
     opacity: 0;
     transition: opacity 1s ease;
     background-color: rgba(0,0,0,0.7);
@@ -302,6 +302,7 @@ h3 {
  
 #resource-data-wrap.show {
     opacity: 1;
+    right: 0;
 }
 
 #resource-data {
