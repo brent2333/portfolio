@@ -114,6 +114,7 @@ nav ul li {
     height: 32px;
     margin-right: 12px;
     align-self: center;
+    background-color: #000;
 }
 
 article {
