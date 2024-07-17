@@ -6,22 +6,33 @@ const getLargerImg = (imageUrl) => {
 };
 
 const insertGuitars = (productList) => {
-  for (const productdata of productList) {
-    pool.query(
-      "INSERT INTO guitars (productdata) VALUES ($1)",
-      [productdata],
-      (error, results) => {
-        if (error) {
-          console.log("ERROR", error);
+  return new Promise((resolve, reject) => {
+    for (const productdata of productList) {
+      pool.query(
+        "INSERT INTO guitars (productdata) VALUES ($1)",
+        [productdata],
+        (error, results) => {
+          if (error) {
+            console.log("ERROR", error);
+          }
+          console.log("SUCCESSFUL GC INSERT");
+          return resolve(true);
+          // return true;
         }
-        console.log("SUCCESSFUL INSERT");
-        return true;
-      }
-    );
-  }
+      );
+    }
+  });
 };
 
 const processGcJson = async () => {
+  console.log("PROCESS GC JSON");
+  pool.query("TRUNCATE TABLE guitars", (error, results) => {
+    if (error) {
+      console.log("ERROR", error);
+      reject(error);
+    }
+  });
+  console.log("************** TABLE TRUNCATED *****************");
   const gcMap = gcData.products.map((gc) => {
     return {
       price: { value: gc.price },
@@ -37,4 +48,6 @@ const processGcJson = async () => {
   }
 };
 
-processGcJson();
+module.exports = {
+  processGcJson,
+};

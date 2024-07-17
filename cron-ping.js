@@ -1,7 +1,9 @@
 const { fetchGuitars } = require("./utils/amazon");
+const { processGcJson } = require("./gc-fromjson");
 const cron = require("node-cron");
 
-cron.schedule("* * * * *", function () {
-  console.log("running task every 5 minutes");
+cron.schedule("* * 23 * *", async function () {
+  console.log("running task every 24 hours");
+  await processGcJson();
   fetchGuitars();
 });

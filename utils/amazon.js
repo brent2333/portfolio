@@ -5,18 +5,22 @@ let canopyapiKey = config?.canopyapiKey || process.env.CANOPYAPI_KEY;
 const pool = require("../db");
 
 const fixPriceData = (data) => {
-  let currPriceData = data.price.value;
-  if (typeof currPriceData === "string") {
-    currPriceData = currPriceData.replace(/[^0-9.]/g, "");
+  if (data.price) {
+    let currPriceData = data.price.value;
+    if (typeof currPriceData === "string") {
+      currPriceData = currPriceData.replace(/[^0-9.]/g, "");
+    }
+    data.price.value = `$${currPriceData}`;
+    return data;
+  } else {
+    return "";
   }
-  data.price.value = `$${currPriceData}`;
-  return data;
 };
 
 const sortProducts = (list) => {
   for (const g of list) {
     g.productdata = fixPriceData(JSON.parse(g.productdata));
-    g.displayImage = g.productdata.imageUrls[0];
+    g.displayImage = g.productdata.imageUrls ? g.productdata.imageUrls[0] : "";
   }
   const amazonProducts = list.filter(
     (product) => product.productdata.retailer === "amazon"
@@ -55,7 +59,7 @@ const insertGuitars = (productList) => {
         if (error) {
           console.log("ERROR", error);
         }
-        console.log("SUCCESSFUL INSERT");
+        console.log("SUCCESSFUL AMAZON INSERT");
         return true;
       }
     );
