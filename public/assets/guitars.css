@@ -10,6 +10,31 @@
   box-sizing: border-box;
 }
 
+.green {
+    color: lightgreen;
+}
+
+.orange {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: lightblue;
+}
+
+.databox {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #000;
+    font-size: 14px;
+    overflow: hidden;
+}
+
 select {
     appearance: none;
     background-color: transparent;
@@ -112,7 +137,7 @@ header {
 header button {
     border-radius: 8px;
     border: 0;
-    background-color: #5aa278;
+    background-color: #3d7454;
     color: #fff; 
     height: 32px;
     align-self: flex-end;

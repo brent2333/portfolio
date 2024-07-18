@@ -1,11 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="/assets/guitars.css">
+  <title>{% if metaTitle %}{{ metaTitle }}{% endif %} | Brent Lawson Portfolio</title>
+  {% if isDev %}
+  <link rel="stylesheet" href="/assets/guitars.css"/>
+  {% elif not isDev %}
+  <link rel="stylesheet" href="/assets/guitars.min.css"/>
+  {% endif %}
   <meta name="description" content="">
 
 </head>
@@ -70,149 +74,8 @@
     <footer class="sans-serif">
         <p>&copy; Copyright 2024</p>
       </footer>
-      <script src="/scripts/web-vitals.iife.js">
-    </script>
 <script id="ddump"></script>
-<script>
-
-    (async function() {
-        const bindImageEvents = () => {
-            const productImageContainers = document.getElementsByClassName("product-img-container");
-            for (const img of productImageContainers) {
-                img.addEventListener('click', () => {
-                    window.open(img.dataset.prodLink, '_blank');
-                });
-            }
-        }
-        const createProductCards = (gridItems) => {
-            const productHTMLs = gridItems.map((gItem) => {
-                return `<div class="product list-item sans-serif">
-                <div class="product-img-container" data-prod-link=${gItem.productdata.url}>
-                    <img src=${gItem.displayImage} alt={name} />
-                    <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer }.png" /></div>
-                </div>
-                <div class="product-details-container sans-serif">
-                    <a href=${gItem.productdata.url} target="_blank"><h3>
-                        ${gItem.productdata.title }
-                      </h3></a>
-                      <div class="product-price">${gItem.productdata.price.value }</div>
-                </div>
-                </div>`;
-            });
-            return productHTMLs.join('');
-        }
-        const chunk = (arr, size) => arr.reduce((carry, _, index, orig) => !(index % size) ? carry.concat([orig.slice(index,index+size)]) : carry, []);
-
-        document.addEventListener("DOMContentLoaded", (event) => {
-
-            const howBtn = document.getElementById("how-made");
-            const howModal = document.getElementById("how-modal");
-            const pGridWrap = document.getElementById("product-grid-wrapper");
-            const databox = document.getElementById("ddump");
-            const currPage = document.getElementById("current-page");
-            const lPagBtn = document.getElementById("left-p-btn");
-            const rPagBtn = document.getElementById("right-p-btn");
-            const retailerFilter = document.getElementById("retailers");
-            const noProductsMesssage = document.getElementById("no-products");
-            const backBtn = document.getElementById("back-btn");
-
-            let pData;
-            let parsed;
-            let chunkLength;
-            const trimProductList = async (currPageVal) => {
-                const filterVal = retailerFilter.value;
-                let gridItems = chunkedProducts[currPageVal - 1];
-                if (filterVal) {
-                    gridItems = gridItems.filter((item) => item.productdata.retailer == filterVal);
-                }
-                if (!gridItems.length) {
-                    noProductsMesssage.classList.add('show');
-                    pGridWrap.innerHTML = `<div>¯/\_(ツ)_/¯</div>`;
-                } else {
-                    const newHTML = await createProductCards(gridItems);
-                    pGridWrap.innerHTML = newHTML;
-                }
-                bindImageEvents();
-            }
-            let currPageVal = 1;
-            currPage.innerHTML = currPageVal;
-
-
-            lPagBtn.addEventListener('click', (event) => {
-                noProductsMesssage.classList.remove('show');
-                if (currPageVal > 1) {
-                    currPageVal -= 1;
-                    currPage.innerHTML = currPageVal;
-                    if (currPageVal > 0) {
-                        trimProductList(currPageVal);
-                    }
-                }
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-            rPagBtn.addEventListener('click', (event) => {
-                noProductsMesssage.classList.remove('show');
-                currPageVal += 1;
-                if (currPageVal <= chunkLength) {
-                    currPage.innerHTML = currPageVal; 
-                    trimProductList(currPageVal); 
-                } else {
-                    currPageVal -= 1;
-                }
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-            backBtn.addEventListener('click', () => {
-                noProductsMesssage.classList.remove('show');
-                if (currPageVal > 1) {
-                    currPageVal -= 1;
-                    currPage.innerHTML = currPageVal;
-                    if (currPageVal > 0) {
-                        trimProductList(currPageVal);
-                    }
-                }
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
- 
-            fetch('/guitardata').then((res) => res.text())
-                .then(function (data) {
-                    databox.innerHTML = data;
-                    pData = databox.innerHTML;
-                    parsed = JSON.parse(pData);
-                    chunkLength = Math.ceil(parsed.length / 18);
-                    chunkedProducts = chunk(parsed, 18);
-            });
-            howBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                howModal.classList.add('show')
-            });
-            howModal.addEventListener("click", (event) => {
-            if (event.target.id === "how-modal") {
-                howModal.classList.remove("show");
-            }
-    });
-
-    document.getElementById('retailers').onchange = async function(){
-        if (this.value) {
-            const gridItems = chunkedProducts[currPageVal - 1];
-            const newGrid = gridItems.filter((item) => item.productdata.retailer == this.value);
-            if (newGrid.length) {
-                const newHTML = await createProductCards(newGrid);
-                pGridWrap.innerHTML = newHTML;
-            } else {
-                noProductsMesssage.classList.add("show");
-            }
-        } else {
-            const gridItems = chunkedProducts[currPageVal - 1];
-            const newHTML = await createProductCards(gridItems);
-            pGridWrap.innerHTML = newHTML;
-        }
-        bindImageEvents();
-    };
-    setTimeout(() => {
-        bindImageEvents();
-    });
-    });
-}());
-</script>
+<script src="/scripts/grid.js"></script>
 <div id="how-modal">
     <div>
         <article>
@@ -227,7 +90,25 @@
 
     </div>
 </div>
-<script src="/scripts/perf.js">
+<script src="/scripts/web-vitals.iife.js"></script>
+<script src="/scripts/perf.js"></script>
+<script>
+(async function () {
+    document.addEventListener("DOMContentLoaded", (event) => {
+
+    const howBtn = document.getElementById("how-made");
+    const howModal = document.getElementById("how-modal");
+    howBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      howModal.classList.add("show");
+    });
+    howModal.addEventListener("click", (event) => {
+      if (event.target.id === "how-modal") {
+        howModal.classList.remove("show");
+      }
+    });
+});
+})();
 </script>
 </body>
 

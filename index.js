@@ -51,6 +51,9 @@ app.get("/guitars", async function (req, res) {
     guitarList: guitarsFromDB.slice(0, 18),
     pageCount: count,
     pageUrl: "/guitars",
+    metaTitle:
+      "Guitar Shopping Aggregator | Atlanta Web Developer | brentlawson-webdeveloper.com",
+    isDev,
   });
 });
 

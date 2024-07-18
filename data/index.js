@@ -25,6 +25,11 @@ imagegenPageData = {
     "AI Image Generation, OpenAI DALL-E | Atlanta Web Developer | brentlawson-webdeveloper.com",
 };
 
+guitarsPageData = {
+  metaTitle:
+    "Guitar Shopping Aggregator | Atlanta Web Developer | brentlawson-webdeveloper.com",
+};
+
 const pageDataMap = {
   "about-me": aboutMeData,
   "about-site": aboutSiteData,
