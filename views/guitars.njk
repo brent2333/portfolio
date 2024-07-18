@@ -43,7 +43,7 @@
     <div id="product-grid-wrapper">
         {% for guitar in guitarList %}
             <div class="product list-item sans-serif">
-                <div class="product-img-container">
+                <div class="product-img-container" data-prod-link={{guitar.productdata.url}}>
                     <img src={{guitar.displayImage}} alt={name} />
                     <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/{{ guitar.productdata.retailer }}.png" /></div>
                 </div>
@@ -76,10 +76,18 @@
 <script>
 
     (async function() {
+        const bindImageEvents = () => {
+            const productImageContainers = document.getElementsByClassName("product-img-container");
+            for (const img of productImageContainers) {
+                img.addEventListener('click', () => {
+                    window.open(img.dataset.prodLink, '_blank');
+                });
+            }
+        }
         const createProductCards = (gridItems) => {
             const productHTMLs = gridItems.map((gItem) => {
                 return `<div class="product list-item sans-serif">
-                <div class="product-img-container">
+                <div class="product-img-container" data-prod-link=${gItem.productdata.url}>
                     <img src=${gItem.displayImage} alt={name} />
                     <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer }.png" /></div>
                 </div>
@@ -124,6 +132,7 @@
                     const newHTML = await createProductCards(gridItems);
                     pGridWrap.innerHTML = newHTML;
                 }
+                bindImageEvents();
             }
             let currPageVal = 1;
             currPage.innerHTML = currPageVal;
@@ -196,8 +205,11 @@
             const newHTML = await createProductCards(gridItems);
             pGridWrap.innerHTML = newHTML;
         }
+        bindImageEvents();
     };
-
+    setTimeout(() => {
+        bindImageEvents();
+    });
     });
 }());
 </script>

@@ -178,6 +178,10 @@ h1 {
     position: relative;
 }
 
+.product-img-container:hover {
+    cursor: pointer;
+}
+
 .product-details-container {
     max-width: 90%;
     display: flex;
