@@ -118,6 +118,7 @@ nav ul li {
 }
 
 article {
+    padding-top: 58px;
     height: 400px;
     overflow-y: hidden;
     position: relative;
@@ -158,9 +159,13 @@ article.full-post {
     font-size: 12px;
 }
 
-article .photo {
-    float: right;
+#postimage img {
+    max-width: 100%;
 }
+
+/* article .photo {
+    float: right;
+} */
 
 .photo {
     mask-image: url('/assets/img/photo.svg');
@@ -171,11 +176,13 @@ article .photo {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    position: absolute;
 }
 
 .photo {
-    width: 190px;
-    height: 200px;
+    width: 157px;
+    height: 147px;
+    align-self: flex-end;
 }
 
 .flex {
@@ -225,6 +232,28 @@ aside {
     color: #333;
 }
 
+#photo-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#photobox {
+    display: flex;
+    align-self: flex-start;
+}
+
+details {
+    flex-basis: 60%;
+    position: relative;
+}
+
+details summary {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 details p {
     padding: 16px;
     border-radius: 18px;
@@ -244,6 +273,10 @@ h1, h2, h3, h4, h5 {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
+#main-title {
+    margin: 0;
+}
+
 button:hover {
     cursor: pointer
 }
@@ -251,7 +284,8 @@ button:hover {
 section {
     display: flex;
     gap: 24px;
-    flex-direction: column; 
+    flex-direction: column;
+    position: relative;
 }
 
 ul {
