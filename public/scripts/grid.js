@@ -75,26 +75,30 @@
     const updatePaginatorHTML = (pageCount, currPage) => {
       const newPaginatorHTML = `<button class="pag-btn" id="left-p-btn">&larr;</button><div>Page <span id="current-page">${currPage}</span> of <span>${pageCount}</span></div><button class="pag-btn" id="right-p-btn">&rarr;</button>`;
       paginatorEL.innerHTML = newPaginatorHTML;
+      currPageVal = currPage;
       setTimeout(() => {
         bindPaginatorEvents();
       });
     };
 
-    const filterNestedChunks = (filter, currPageVal, dataBoxEl) => {
+    const filterNestedChunks = (filterSelection, currPageVal, dataBoxEl) => {
       pData = dataBoxEl.innerHTML;
       parsed = JSON.parse(pData);
+      let currPageDisplay;
       let chunks = chunk(parsed, 18);
       let newChunks = chunks
         .map(
           (chunk) =>
             (chunk = chunk.filter(
-              (item) => item.productdata.retailer == filter
+              (item) => item.productdata.retailer == filterSelection
             ))
         )
         .filter((chunk) => chunk.length > 0);
       chunkedProducts = newChunks;
       chunkLength = newChunks.length;
-      updatePaginatorHTML(newChunks.length, currPageVal, paginatorEL);
+      currPageDisplay =
+        currPageVal > newChunks.length ? newChunks.length : currPageVal;
+      updatePaginatorHTML(newChunks.length, currPageDisplay, paginatorEL);
       return newChunks;
     };
 
@@ -153,7 +157,9 @@
           databox,
           paginatorEL
         );
-        const gridItems = chunkedProducts[currPageVal - 1];
+        const gridItems = chunkedProducts[currPageVal - 1]
+          ? chunkedProducts[currPageVal - 1]
+          : chunkedProducts[chunkedProducts.length - 1];
         const newGrid = gridItems.filter(
           (item) => item.productdata.retailer == this.value
         );
