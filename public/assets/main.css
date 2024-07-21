@@ -277,7 +277,6 @@ h1, h2, h3, h4, h5 {
     margin: 0;
     max-width: calc(100% - 170px);
     text-wrap: wrap;
-    word-break: break-all;
 }
 
 button:hover {
