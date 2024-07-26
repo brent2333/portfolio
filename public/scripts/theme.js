@@ -1,9 +1,7 @@
 (async function () {
   function setDocumentClasses(themeClass) {
     const html = document.getElementsByTagName("html");
-    if (!html[0].classList.contains(themeClass)) {
-      html[0].classList = [themeClass];
-    }
+    html[0].classList = [themeClass];
   }
   function setThemeFromLocalStorageOrMediaPreference() {
     const theme = localStorage.getItem("themeSetting") || "auto";
@@ -23,12 +21,6 @@
         }
         break;
     }
-
-    document
-      .querySelectorAll(`.theme_toggle input[value='${theme}']`)
-      .forEach(function (toggle) {
-        toggle.checked = true;
-      });
   }
 
   document.addEventListener("DOMContentLoaded", (event) => {

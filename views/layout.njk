@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class={{ theme }}>
   <head>
-    <style>body{background-color:#47506b}.light body{background-color:#ddd}footer,header{background-color:#262d40}main{color:#ddd}.light main{color:#333}.light footer,.light header{background-color:rgba(0,0,0,.1)}.sans-serif{font-family:'Franklin Gothic Medium',Arial,sans-serif}main{max-width:1024px;width:90vw;margin:0 auto;padding:32px 16px 16px 16px;display:grid;grid-template-columns:60% calc(40% - 24px);gap:24px;position:relative}footer,header{padding:16px;width:90vw;margin:0 auto;border-radius:18px;max-width:1024px}header{display:flex;flex-wrap:wrap;gap:8px;align-content:center;justify-content:center}header a:not(.logo){color:#ddd;font-weight:300;background-color:rgba(30,32,38,.7);padding:6px 8px;border-radius:4px;text-decoration:none;font-size:13px}header a:not(.logo):hover{background-color:rgba(0,0,0,.4);cursor:pointer}nav input[type=checkbox],nav label{display:none}nav ul li{white-space:nowrap}.ham{display:flex;flex-direction:column;width:50px;height:30px;gap:3px}.ham span{display:block;background-color:#000;border-radius:6px;padding:4px}nav{flex-grow:3}#theme-wrap{color:#ddd;justify-content:center;display:flex;flex-direction:column;text-align:center;flex-wrap:wrap;align-content:center;position:relative;height:30px;align-self:center}#theme-wrap span{font-size:13px}#radio-theme-wrap{padding-top:11px;display:flex;gap:7px;justify-content:center;color:#ddd;font-size:12px;width:100px;align-self:center}#radio-theme-wrap label{font-weight:200;height:32px;width:40px;display:flex;flex-direction:column;flex-wrap:wrap}#radio-theme-wrap label[for=light]{margin-top:1px}#radio-theme-wrap input{opacity:0;margin:0}#radio-theme-wrap label:hover{cursor:pointer}.dark #radio-theme-wrap label span{color:#fff;font-size:18px}.light #radio-theme-wrap label span{color:#333;font-size:18px}.visible-picker-wrap{position:absolute;left:calc(50% - 22px);display:flex}.track{height:16px;width:44px;box-shadow:inset 0 2px 4px 0 #000;border-radius:8px;position:relative}.dark .track{border:1px solid #ddd}.light .track{border:1px solid #333}.track-dot{border-radius:8px;position:absolute;top:1px;left:30px;height:16px;width:16px;opacity:.7}.dark .track-dot{background-color:#ddd;left:30px}.light .track-dot{background-color:#333;left:1px}.round{mask-image:url(/assets/img/photo.svg);mask-repeat:no-repeat;mask-position:top;mask-size:100%;border:4px solid rgba(0,0,0,.6);width:32px;height:32px;margin-right:12px;align-self:center;background-color:#000}button:hover{cursor:pointer}section{display:flex;gap:24px;flex-direction:column;position:relative}ul{list-style-type:none;display:flex;gap:8px}button{max-width:140px;padding:14px;border-radius:10px;font-size:16px;border:none;box-shadow:rgba(0,0,0,.3) 2px 2px 10px 4px}button{background-color:#304a3b;color:#eee}.light button{background-color:#5aa278;color:#fff}button:hover{background-color:#182a20}</style>
+    <style>body{background-color:#47506b}.light body{background-color:#ddd}footer,header{background-color:#262d40}.light footer,.light header{background-color:rgba(0,0,0,.1)}.sans-serif{font-family:'Franklin Gothic Medium',Arial,sans-serif}.skip-to-content-link{background:#e77e23;height:30px;left:50%;padding:8px;position:absolute;transform:translateX(-100%);opacity:0;transition:transform .3s}.skip-to-content-link:focus{transform:translateY(0);opacity:1}main{color:#ddd}.light main{color:#333}main{max-width:1024px;width:90vw;margin:0 auto;padding:32px 16px 16px 16px;display:grid;grid-template-columns:60% calc(40% - 24px);gap:24px;position:relative}footer,header{padding:16px;width:90vw;margin:0 auto;border-radius:18px;max-width:1024px}header{display:flex;flex-wrap:wrap;gap:8px;align-content:center;justify-content:center}header a:not(.logo){color:#ddd;font-weight:300;background-color:rgba(30,32,38,.7);padding:6px 8px;border-radius:4px;text-decoration:none;font-size:13px}header a:not(.logo):hover{background-color:rgba(0,0,0,.4);cursor:pointer}nav input[type=checkbox],nav label{display:none}nav ul li{white-space:nowrap}.ham{display:flex;flex-direction:column;width:50px;height:30px;gap:3px}.ham span{display:block;background-color:#000;border-radius:6px;padding:4px}nav{flex-grow:3}#theme-wrap{color:#ddd;justify-content:center;display:flex;flex-direction:column;text-align:center;flex-wrap:wrap;align-content:center;position:relative;height:30px;align-self:center}#theme-wrap span{font-size:13px}#radio-theme-wrap{padding-top:11px;display:flex;gap:7px;justify-content:center;color:#ddd;font-size:12px;width:100px;align-self:center}#radio-theme-wrap label{font-weight:200;height:32px;width:40px;display:flex;flex-direction:column;flex-wrap:wrap}#radio-theme-wrap label[for=light]{margin-top:1px}#radio-theme-wrap input{opacity:0;margin:0}#radio-theme-wrap label:hover{cursor:pointer}.dark #radio-theme-wrap label span{color:#fff;font-size:18px}.light #radio-theme-wrap label span{color:#333;font-size:18px}.visible-picker-wrap{position:absolute;left:calc(50% - 22px);display:flex}.track{height:16px;width:44px;box-shadow:inset 0 2px 4px 0 #000;border-radius:8px;position:relative}.dark .track{border:1px solid #ddd}.light .track{border:1px solid #333}.track-dot{border-radius:8px;position:absolute;top:1px;left:30px;height:16px;width:16px;opacity:.7}.dark .track-dot{background-color:#ddd;left:30px}.light .track-dot{background-color:#333;left:1px}.round{mask-image:url(/assets/img/photo.svg);mask-repeat:no-repeat;mask-position:top;mask-size:100%;border:4px solid rgba(0,0,0,.6);width:32px;height:32px;margin-right:12px;align-self:center;background-color:#000}button:hover{cursor:pointer}section{display:flex;gap:24px;flex-direction:column;position:relative}ul{list-style-type:none;display:flex;gap:8px}button{max-width:140px;padding:14px;border-radius:10px;font-size:16px;border:none;box-shadow:rgba(0,0,0,.3) 2px 2px 10px 4px}button{background-color:#304a3b;color:#eee}.light button{background-color:#5aa278;color:#fff}button:hover{background-color:#182a20}</style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9WFNS9D6T8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -9,6 +9,70 @@
       gtag('js', new Date());
 
       gtag('config', 'G-9WFNS9D6T8');
+    </script>
+    <script>
+      (async function () {
+        function setDocumentClasses(themeClass) {
+          const html = document.getElementsByTagName("html");
+          html[0].classList = [themeClass];
+        }
+        function setThemeFromLocalStorageOrMediaPreference() {
+          const theme = localStorage.getItem("themeSetting") || "auto";
+
+          switch (theme) {
+            case "dark":
+              setDocumentClasses("dark");
+              break;
+            case "light":
+              setDocumentClasses("light");
+              break;
+            case "auto":
+              if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                setDocumentClasses("dark");
+              } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+                setDocumentClasses("light");
+              }
+              break;
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+          const theme = localStorage.getItem("themeSetting");
+          const html = document.getElementsByTagName("html");
+          if (theme) {
+            html[0].classList = [theme];
+          }
+          setTimeout(() => {
+            setThemeFromLocalStorageOrMediaPreference();
+          }, 600);
+
+          document.querySelectorAll("#theme-wrap input").forEach((toggle) => {
+            toggle.addEventListener(
+              "change",
+              (e) => {
+                if (e.target.checked) {
+                  if (e.target.value == "auto") {
+                    localStorage.removeItem("themeSetting");
+                  } else {
+                    localStorage.setItem("themeSetting", e.target.value);
+                  }
+                }
+
+                setThemeFromLocalStorageOrMediaPreference();
+              },
+              false
+            );
+          });
+
+          // handle other tabs changing local storage
+          window.addEventListener("storage", (e) => {
+            if (e.key == "themeSetting") {
+              setThemeFromLocalStorageOrMediaPreference();
+            }
+          });
+        });
+      })();
+
     </script>
     {% block head %}
     {% if isDev %}
@@ -26,7 +90,6 @@
         {% block title %}{% endblock %}{% if metaTitle %}{{ metaTitle }}{% endif %} | Brent Lawson Portfolio</title>
     {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-    <script src="/scripts/theme.js"></script>
   </head>
   <body>
   <header class="sans-serif">
@@ -42,10 +105,18 @@
         </label>
          <input id='menu' type='checkbox' />
           <ul>
-        {% for navItem in navList %}
+            {% for navItem in navList %}
+              <li><a href={{ navItem.url }} class="nav-link">{{ navItem.text }}</a></li>
+            {% endfor %}
+        <noscript>
+          {% for navItem in navList %}
             <li><a href={{ navItem.url }}>{{ navItem.text }}</a></li>
         {% endfor %}
+      </noscript>
         </ul>
+        <a class="skip-to-content-link" href="#main">
+          Skip to content
+        </a>
       </nav>
       <div id="theme-wrap">
         <div id="radio-theme-wrap">
@@ -61,7 +132,7 @@
     </div>
     <div id="resource-btn-wrap"><button id="resource-timing-btn">Show Vitals & Resources </button></div>
 </header>
-      <main>
+      <main id="main">
       {% block content %}{% endblock %}
       <div id="sendmessage">
         <h3>Get in Touch</h3>
@@ -126,50 +197,22 @@
 <script src="/scripts/perf.js"></script>
 <script>
   (async function() {
+    const passTheme = (event) => {
+      event.preventDefault();
+      const ref = event.target.getAttribute('href');
+      const theme = localStorage.getItem("themeSetting");
+      const url =  theme ? `${ref}?theme=${theme}` : ref;
+      window.location.assign(url);
+    }
   
         document.addEventListener("DOMContentLoaded", (event) => {
-  
-          const nameValidation = document.getElementById('namebad');
-          const emailValidation = document.getElementById('emailbad');
-  
-          //form
-          const formBtn = document.getElementById('sign-up-btn');
-          const formWrap = document.querySelectorAll('.form-wrap')[0];
-          formBtn.addEventListener('click', () => {
-            formWrap.classList.add('open-form');
-            formBtn.classList.add('hidden');
-          });
-          const form = document.getElementById('userForm');
-          form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            nameValidation.classList.remove('show');
-            emailValidation.classList.remove('show');
-            var data = this;
-            const fData = new FormData(data);
-            const nameData = fData.get('name');
-            const nameTest = /^[a-zA-Z]+$/.test(nameData);
-            const usernameData = fData.get('username');
-  
-            if (usernameData) {
-              return;
-            }
-            if (nameData === "" || !isNaN(nameData) || !nameTest) {
-              nameValidation.classList.add('show');
-              return;
-            }
-            fetch(data.getAttribute('action'), {
-            method: data.getAttribute('method'),
-            body: fData
-            }).then(res=>res.text())
-            .then(function (data) {
-                const response = fetch('/thanks').then(res=>res.text())
-                .then(function (data) {
-                  formWrap.innerHTML = data;
-                });
-            });
-          });
+          const navLinks = document.querySelectorAll('.nav-link');
+          for (const link of navLinks) {
+            link.addEventListener('click', passTheme);
+          }
     });
   }())
   </script>
+  <script src="/scripts/message.js"></script>
   </body>
 </html>

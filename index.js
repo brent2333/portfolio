@@ -33,8 +33,14 @@ nunjucks.configure("views", {
 app.set("view engine", "njk");
 app.use(express.static(path.join(__dirname, "public")));
 
-const getDataOptions = (url) => {
-  const PageData = { ...mainNav, ...pageDataMap[url], pageUrl: url, isDev };
+const getDataOptions = (url, theme) => {
+  const PageData = {
+    ...mainNav,
+    ...pageDataMap[url],
+    pageUrl: url,
+    isDev,
+    theme,
+  };
   return PageData;
 };
 
@@ -119,8 +125,16 @@ app.get("/*", function (req, res) {
   } else if (req.originalUrl.includes("sitemap")) {
     res.sendFile(path.join(__dirname, "./", req.originalUrl));
   } else {
-    const dataOptions = getDataOptions(req.originalUrl.replace("/", ""));
-    res.render(req.originalUrl.replace("/", ""), dataOptions);
+    const params = req.originalUrl.split("?")[1];
+    let theme;
+    if (params && params.includes("theme")) {
+      theme = params.split("=")[1];
+    }
+    const dataOptions = getDataOptions(
+      req.originalUrl.split("?")[0].replace("/", ""),
+      theme || ""
+    );
+    res.render(req.originalUrl.split("?")[0].replace("/", ""), dataOptions);
   }
 });
 
