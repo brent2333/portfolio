@@ -2,30 +2,25 @@
   function setDocumentClasses(themeClass) {
     const html = document.getElementsByTagName("html");
     if (!html[0].classList.contains(themeClass)) {
-      html[0].classList.remove("dark");
-      html[0].classList.remove("light");
-      html[0].classList.remove("auto");
-      html[0].classList.add(themeClass);
+      html[0].classList = [themeClass];
     }
   }
   function setThemeFromLocalStorageOrMediaPreference() {
     const theme = localStorage.getItem("themeSetting") || "auto";
 
     switch (theme) {
+      case "dark":
+        setDocumentClasses("dark");
+        break;
+      case "light":
+        setDocumentClasses("light");
+        break;
       case "auto":
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
           setDocumentClasses("dark");
         } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
           setDocumentClasses("light");
         }
-        break;
-
-      case "dark":
-        setDocumentClasses("dark");
-        break;
-
-      case "light":
-        setDocumentClasses("light");
         break;
     }
 
