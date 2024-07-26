@@ -94,7 +94,9 @@ select {
   }
 
   #grid-filters {
+    flex-wrap: wrap;
     display: flex;
+    align-content: center;
   }
 
 body {
@@ -167,6 +169,12 @@ h1 {
 
 .sans-serif {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+}
+
+.no-wrap {
+    white-space: nowrap;
+    display: block;
+    margin-right: 12px;
 }
 
 #product-grid-wrapper {

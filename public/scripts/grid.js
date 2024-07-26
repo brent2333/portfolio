@@ -41,6 +41,8 @@
     const currPage = document.getElementById("current-page");
 
     const retailerFilter = document.getElementById("retailers");
+    const sortControl = document.getElementById("sort");
+
     const noProductsMesssage = document.getElementById("no-products");
     const backBtn = document.getElementById("back-btn");
     const paginatorEL = document.getElementsByClassName("paginator")[0];
@@ -180,6 +182,33 @@
         updatePaginatorHTML(chunkedProducts.length, currPageVal);
       }
       bindImageEvents();
+    };
+
+    document.getElementById("sort").onchange = async function () {
+      let filterVal;
+      if (this.value) {
+        filterVal = this.value;
+        const gridItems = [...chunkedProducts[currPageVal - 1]];
+        if (filterVal === "lth") {
+          gridItems.sort(
+            (a, b) =>
+              parseInt(a.productdata.price.value.replace("$", "")) -
+              parseInt(b.productdata.price.value.replace("$", ""))
+          );
+        } else if (filterVal === "htl") {
+          gridItems.sort(
+            (a, b) =>
+              parseInt(b.productdata.price.value.replace("$", "")) -
+              parseInt(a.productdata.price.value.replace("$", ""))
+          );
+        }
+        const newHTML = await createProductCards(gridItems);
+        pGridWrap.innerHTML = newHTML;
+      } else {
+        const gridItems = [...chunkedProducts[currPageVal - 1]];
+        const newHTML = await createProductCards(gridItems);
+        pGridWrap.innerHTML = newHTML;
+      }
     };
     setTimeout(() => {
       bindImageEvents();
