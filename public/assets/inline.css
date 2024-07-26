@@ -269,3 +269,9 @@ button {
 button:hover {
     background-color: #182a20;
 }
+
+@media(max-width: 769px) {
+.skip-to-content-link {
+    display: none;
+}
+}
