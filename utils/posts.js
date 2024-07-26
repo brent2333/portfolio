@@ -2,7 +2,7 @@ const pool = require("../db");
 
 const getPosts = () => {
   return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM posts", (error, results) => {
+    pool.query("SELECT * FROM posts ORDER BY post_id ASC", (error, results) => {
       if (error) {
         reject(error);
         throw error;
