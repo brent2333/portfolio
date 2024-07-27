@@ -1,12 +1,14 @@
 {
     "technologies": [
+        "JavaScript",
+        "HTML",
+        "CSS",
         "React",
         "NextJS",
         "Angular",
         "ExpressJS",
+        "Sass",
         "Typescript",
-        "HTML",
-        "CSS/SASS",
         "GitLab",
         "GitHub Actions",
         "OpenShift",
@@ -14,8 +16,7 @@
         "Figma",
         "Storybook",
         "MongoDB",
-        "MYSQL",
-        "PHP",
-        ".NET"
+        "SQL",
+        "PHP"
         ]
 }

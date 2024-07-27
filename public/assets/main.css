@@ -74,10 +74,26 @@ article.full-post {
 .flex-col {
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 
 .flex-col li {
     font-size: 18px;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.flex-col li:after {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 8px;
+    color: #fff;
+}
+
+.flex-col li span {
+    height: 30px;
+    padding-top: 4px;
 }
 
 .hidden {
@@ -389,6 +405,80 @@ textarea {
     padding: 32px;
 }
 
+aside ul li {
+    color: #fff;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: right;
+}
+
+.light aside ul li {
+    color: #333;
+}
+
+.React:after {
+    content: url(/assets/img/techs/react.svg);
+  }
+  .NextJS:after {
+    content: url(/assets/img/techs/nextjs.svg);
+  }
+  .Angular:after {
+    content: url(/assets/img/techs/angular.svg);
+  }
+  .Angular:after {
+    content: url(/assets/img/techs/angular.svg);
+  }
+  .ExpressJS:after {
+    content: url(/assets/img/techs/express.svg);
+  }
+  .JavaScript:after {
+    content: url(/assets/img/techs/javascript.svg);
+  }
+  .Typescript:after {
+    content: url(/assets/img/techs/typescript.svg);
+  }
+  .HTML:after {
+    content: url(/assets/img/techs/html.svg);
+  }
+  .CSS:after {
+    content: url(/assets/img/techs/css.svg);
+  }
+  .Sass:after {
+    content: url(/assets/img/techs/sass.svg);
+  }
+  .GitLab:after {
+    content: url(/assets/img/techs/gitlab.svg);
+  }
+  .GitHub:after {
+    content: url(/assets/img/techs/github.svg);
+  }
+  .OpenShift:after {
+    content: url(/assets/img/techs/openshift.svg);
+  }
+  .Splunk:after {
+    content: url(/assets/img/techs/splunk.svg);
+  }
+  .Figma:after {
+    content: url(/assets/img/techs/figma.svg);
+  }
+  .Storybook:after {
+    content: url(/assets/img/techs/storybook.svg);
+  }
+  .MongoDB:after {
+    content: url(/assets/img/techs/mongodb.svg);
+  }
+  .SQL:after {
+    content: url(/assets/img/techs/sql.svg);
+  }
+  .PHP:after {
+    content: url(/assets/img/techs/php.svg);
+  }
+  .light .flex-col li:after {
+    filter: invert(99%) brightness(96%);
+  }
+
+
 @media(max-width: 769px) {
 
     main {
@@ -400,6 +490,9 @@ textarea {
     
     header, footer {
         width: 88vw;
+    }
+    aside {
+        width: 100%;
     }
 
     p {
