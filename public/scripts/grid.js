@@ -21,6 +21,7 @@
                     ${gItem.productdata.title}
                   </h3></a>
                   <div class="product-price">${gItem.productdata.price.value}</div>
+                  <div class="compare-ctrl"><input id=${gItem.id} type="checkbox" /><label for=${gItem.id}> Compare</label></div>
             </div>
             </div>`;
     });
