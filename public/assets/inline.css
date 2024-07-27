@@ -18,6 +18,18 @@ header, footer {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
+#backtop {
+    position: fixed;
+    right: 6%;
+    bottom: 6%;
+}
+
+#backtop-btn {
+    padding: 14px 10px 6px 10px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
 .skip-to-content-link {
     background: #e77e23;
     height: 30px;

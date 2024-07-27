@@ -20,11 +20,12 @@ postsRouter.get("/remainder/:id", (request, response) => {
 
 postsRouter.post("/create", (request, response) => {
   const { title, body } = request.fields;
-  const d = new Date();
-  var curr_date = d.getDate();
-  var curr_month = d.getMonth();
-  var curr_year = d.getFullYear();
-  const date = `${curr_month + 1}/${curr_date}/${curr_year}`;
+  const date = new Date().toLocaleDateString("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   const author = "brent";
   pool.query(
     "INSERT INTO posts (author, title, date, body) VALUES ($1, $2, $3, $4)",
