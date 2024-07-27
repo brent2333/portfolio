@@ -111,7 +111,7 @@ header, footer {
     width: 90vw;
     margin: 0 auto;
     border-radius: 18px;
-    max-width: 1024px;
+    max-width: 1270px;
 }
 
 footer {
@@ -171,6 +171,19 @@ h1 {
     font-family: 'Franklin Gothic Medium', Arial, sans-serif;
 }
 
+#backtop {
+    position: fixed;
+    right: 6%;
+    bottom: 6%;
+}
+
+#backtop-btn {
+    padding: 14px 10px 6px 10px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+
 .no-wrap {
     white-space: nowrap;
     display: block;
@@ -181,8 +194,11 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    padding: 32px 24px;
+    padding: 0 0 24px 0;
     justify-content: center;
+    width: 90vw;
+    max-width: 1270px;
+    margin: 0 auto;
 }
 
 #no-products {
@@ -198,7 +214,7 @@ h1 {
 }
 
 .product {
-    flex-basis: calc(33.33% - 48px);
+    flex-basis: calc(33.33% - 12px);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -383,14 +399,7 @@ h3 {
     font-size: 14px;
     overflow: hidden;
 }
-@media screen AND (max-width: 769px) {
-    .product {
-        flex-basis: calc(50% - 32px);
-
-    }
-}
-
-@media screen AND (max-width: 562px) {
+@media screen AND (max-width: 968px) {
     .product {
         flex-basis: 100%;
     }

@@ -108,21 +108,24 @@
 <script>
 (async function () {
     document.addEventListener("DOMContentLoaded", (event) => {
-
-    const howBtn = document.getElementById("how-made");
-    const howModal = document.getElementById("how-modal");
-    howBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      howModal.classList.add("show");
-    });
-    howModal.addEventListener("click", (event) => {
-      if (event.target.id === "how-modal") {
-        howModal.classList.remove("show");
-      }
-    });
+        const backToTopBtn = document.getElementById('backtop-btn');
+        const howBtn = document.getElementById("how-made");
+        const howModal = document.getElementById("how-modal");
+        howBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        howModal.classList.add("show");
+        });
+        howModal.addEventListener("click", (event) => {
+        if (event.target.id === "how-modal") {
+            howModal.classList.remove("show");
+        }
+        });
+        backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+          });
 });
 })();
 </script>
+<div id="backtop"><button id="backtop-btn">&Hat;</button></div>
 </body>
-
 </html>
