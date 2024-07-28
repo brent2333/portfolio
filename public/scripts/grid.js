@@ -9,6 +9,7 @@
       });
     }
   };
+
   const createProductCards = (gridItems) => {
     const productHTMLs = gridItems.map((gItem) => {
       return `<div class="product list-item sans-serif">
@@ -21,7 +22,7 @@
                     ${gItem.productdata.title}
                   </h3></a>
                   <div class="product-price">${gItem.productdata.price.value}</div>
-                  <div class="compare-ctrl"><input id=${gItem.id} type="checkbox" /><label for=${gItem.id}> Compare</label></div>
+                  <div class="compare-ctrl"><input class="compare-chx" id=${gItem.id} type="checkbox" /><label for=${gItem.id}> Compare</label></div>
             </div>
             </div>`;
     });
@@ -37,12 +38,18 @@
     );
 
   document.addEventListener("DOMContentLoaded", (event) => {
+    let chunkedProducts;
+    const comparedProducts = [];
+    const compareButton = document.getElementById("compare-products");
+    const compareModal = document.getElementById("compare-modal");
+    const compareModalWrapper =
+      document.getElementsByClassName("guitar-modal")[1];
+
     const pGridWrap = document.getElementById("product-grid-wrapper");
     const databox = document.getElementById("ddump");
     const currPage = document.getElementById("current-page");
 
     const retailerFilter = document.getElementById("retailers");
-    const sortControl = document.getElementById("sort");
 
     const noProductsMesssage = document.getElementById("no-products");
     const backBtn = document.getElementById("back-btn");
@@ -148,7 +155,34 @@
         parsed = JSON.parse(pData);
         chunkLength = Math.ceil(parsed.length / 18);
         chunkedProducts = chunk(parsed, 18);
+        bindInputs("compareChex");
       });
+
+    const bindInputs = (useCase) => {
+      switch (useCase) {
+        case "compareChex":
+          const compareChex = document.querySelectorAll(".compare-chx");
+          let gridItems = chunkedProducts[currPageVal - 1];
+          for (const chx of compareChex) {
+            chx.addEventListener("click", (event) => {
+              let selectedProduct = gridItems.filter(
+                (item) => item.id == event.target.id
+              );
+              comparedProducts.push(selectedProduct[0]);
+            });
+          }
+          break;
+      }
+    };
+
+    compareButton.addEventListener("click", () => {
+      compareModal.classList.add("show");
+    });
+    compareModalWrapper.addEventListener("click", (event) => {
+      if (event.target.id === "compare-modal") {
+        compareModal.classList.remove("show");
+      }
+    });
 
     bindPaginatorEvents();
 

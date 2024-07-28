@@ -303,7 +303,7 @@ h3 {
     width: 30px;
 }
 
-#how-modal {
+.guitar-modal {
     background: rgba(0,0,0,0.5);
     width: 100%;
     height: 100%;
@@ -313,11 +313,22 @@ h3 {
     display: none;
     padding-top: 24px;
 }
-#how-modal.show {
+
+/* #how-modal {
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    padding-top: 24px;
+} */
+.guitar-modal.show {
     display: block;
 }
 
-#how-modal > div {
+.guitar-modal > div {
     width: 60%;
     height: 80vh;
     max-width: 500px;

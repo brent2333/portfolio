@@ -41,6 +41,7 @@
                 </div>
                 </form>
             </div>
+            <div><button id="compare-products">Compare</button></div>
             <div>
                 <form id="grid-filters">
                     <label for="sort" class="sans-serif no-wrap">Sort By</label>
@@ -72,7 +73,7 @@
                       </div>
                 </div>
                 <div class="product-price">{{ guitar.productdata.price.value }}</div>
-                <div class="compare-ctrl"><input id={{guitar.id}} type="checkbox" /><label for={{guitar.id}}> Compare</label></div>
+                <div class="compare-ctrl"><input class="compare-chx" id={{guitar.id}} type="checkbox" /><label for={{guitar.id}}> Compare</label></div>
                 </div>
         {% endfor %}
         </div>
@@ -90,7 +91,7 @@
       </footer>
 <script id="ddump"></script>
 <script src="/scripts/grid.js"></script>
-<div id="how-modal">
+<div id="how-modal" class="guitar-modal">
     <div>
         <article>
         <h3>How it's Made</h3>
@@ -104,6 +105,11 @@
 
     </div>
 </div>
+<div id="compare-modal" class="guitar-modal">
+    <div>
+compare guitars
+    </div>
+</div>
 <script src="/scripts/web-vitals.iife.js"></script>
 <script src="/scripts/perf.js"></script>
 <script>
@@ -112,18 +118,19 @@
         const backToTopBtn = document.getElementById('backtop-btn');
         const howBtn = document.getElementById("how-made");
         const howModal = document.getElementById("how-modal");
+        const howModalWrapper = document.getElementsByClassName("guitar-modal")[0];
         howBtn.addEventListener("click", (event) => {
         event.preventDefault();
         howModal.classList.add("show");
         });
-        howModal.addEventListener("click", (event) => {
+        howModalWrapper.addEventListener("click", (event) => {
         if (event.target.id === "how-modal") {
             howModal.classList.remove("show");
         }
         });
         backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-          });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 });
 })();
 </script>
