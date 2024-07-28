@@ -13,16 +13,48 @@
   const createProductCards = (gridItems) => {
     const productHTMLs = gridItems.map((gItem) => {
       return `<div class="product list-item sans-serif">
-            <div class="product-img-container" data-prod-link=${gItem.productdata.url}>
+            <div class="product-img-container" data-prod-link=${
+              gItem.productdata.url
+            }>
                 <img src=${gItem.displayImage} alt={name} />
-                <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer}.png" /></div>
+                <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${
+                  gItem.productdata.retailer
+                }.png" /></div>
             </div>
             <div class="product-details-container sans-serif">
                 <a href=${gItem.productdata.url} target="_blank"><h3>
                     ${gItem.productdata.title}
                   </h3></a>
-                  <div class="product-price">${gItem.productdata.price.value}</div>
-                  <div class="compare-ctrl"><input class="compare-chx" id=${gItem.id} type="checkbox" /><label for=${gItem.id}> Compare</label></div>
+                  <div class="product-price">${
+                    gItem.productdata.price.value
+                  }</div>
+                  <div class="ratings-box"><div class="rating"><span style="--ratingnum:${
+                    gItem.productdata.rating * 20
+                  }%"></span></div><div class="review-count"><span>${
+        gItem.productdata.ratingsTotal
+      } reviews</span></div></div>
+                  <div class="compare-ctrl"><input class="compare-chx" id=${
+                    gItem.id
+                  } type="checkbox" /><label for=${
+        gItem.id
+      }> Compare</label></div>
+            </div>
+            </div>`;
+    });
+    return productHTMLs.join("");
+  };
+  const createCompareCards = (gridItems) => {
+    const productHTMLs = gridItems.map((gItem) => {
+      return `<div class="product list-item sans-serif">
+            <div class="product-price">${gItem.productdata.price.value}</div>
+            <div class="product-details-container sans-serif">
+                <a href=${gItem.productdata.url} target="_blank"><h3>
+                    ${gItem.productdata.title}
+                  </h3></a>
+            </div>
+            <div class="product-img-container" data-prod-link=${gItem.productdata.url}>
+                <img src=${gItem.displayImage} alt={name} />
+                <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer}.png" /></div>
             </div>
             </div>`;
     });

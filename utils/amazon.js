@@ -79,6 +79,8 @@ query amazonProduct {
         url
         title
         subtitle
+        ratingsTotal
+        rating
       }
     }
   }

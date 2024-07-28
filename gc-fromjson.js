@@ -34,12 +34,15 @@ const processGcJson = async () => {
   });
   console.log("************** TABLE TRUNCATED *****************");
   const gcMap = gcData.products.map((gc) => {
+    gcRating = gc.rating / 2;
     return {
       price: { value: gc.price },
       url: `https://www.guitarcenter.com${gc.linkUrl}`,
       title: gc.displayName,
       imageUrls: [getLargerImg(gc.thumb)],
       brand: gc.linkUrl.split("/")[0],
+      ratingsTotal: gc.reviews,
+      rating: gcRating,
       retailer: "gc",
     };
   });
