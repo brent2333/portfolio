@@ -53,7 +53,9 @@
         gItem.productdata.ratingsTotal || 0
       } reviews</span></div></div>
             <div class="product-details-container sans-serif">
-                <a href=${gItem.productdata.url} target="_blank"><h3>
+                <a class="char-limit" href=${
+                  gItem.productdata.url
+                } target="_blank"><h3>
                     ${gItem.productdata.title}
                   </h3></a>
             </div>
@@ -96,11 +98,19 @@
     const noProductsMesssage = document.getElementById("no-products");
     const backBtn = document.getElementById("back-btn");
     const paginatorEL = document.getElementsByClassName("paginator")[0];
+    const clearCompares = () => {
+      const compareChex = document.querySelectorAll(".compare-chx");
+      for (const chx of compareChex) {
+        chx.checked = false;
+      }
+      comparedProducts.length = 0;
+    };
     const bindPaginatorEvents = () => {
       const currPage = document.getElementById("current-page");
       const lPagBtn = document.getElementById("left-p-btn");
       const rPagBtn = document.getElementById("right-p-btn");
       lPagBtn.addEventListener("click", (event) => {
+        clearCompares();
         noProductsMesssage.classList.remove("show");
         if (currPageVal > 1) {
           currPageVal -= 1;
@@ -112,6 +122,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
       rPagBtn.addEventListener("click", (event) => {
+        clearCompares();
         noProductsMesssage.classList.remove("show");
         currPageVal += 1;
         if (currPageVal <= chunkLength) {
@@ -207,10 +218,24 @@
           let gridItems = chunkedProducts[currPageVal - 1];
           for (const chx of compareChex) {
             chx.addEventListener("click", (event) => {
-              let selectedProduct = gridItems.filter(
-                (item) => item.id == event.target.id
-              );
-              comparedProducts.push(selectedProduct[0]);
+              if (!event.target.checked) {
+                const preselected = comparedProducts.findIndex(
+                  (item) => item.id == event.target.id
+                );
+                if (preselected) {
+                  comparedProducts.splice(preselected, 1);
+                }
+              } else {
+                let selectedProduct = gridItems.filter(
+                  (item) => item.id == event.target.id
+                );
+                const dups = comparedProducts.filter(
+                  (product) => product === selectedProduct[0]
+                );
+                if (!dups.length) {
+                  comparedProducts.push(selectedProduct[0]);
+                }
+              }
             });
           }
           break;
@@ -218,12 +243,12 @@
     };
 
     compareButton.addEventListener("click", async () => {
-      if (comparedProducts && comparedProducts.length) {
+      if (comparedProducts && comparedProducts.length > 1) {
         const compareCards = await createCompareCards(comparedProducts);
         compareCardBox.innerHTML = compareCards;
       } else {
         compareCardBox.innerHTML =
-          "<p>Please make some selections to compare.</p>";
+          "<p>Please make at least two selections to compare.</p>";
       }
       bindImageEvents();
       compareModal.classList.add("show");

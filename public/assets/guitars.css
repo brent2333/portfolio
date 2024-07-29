@@ -352,6 +352,7 @@ h3 {
 #compare-wrap {
     width: 690px;
     max-width: 90vw;
+    height: 500px;
 }
 
 #compare-cards {
@@ -366,6 +367,12 @@ h3 {
     width: 260px;
     padding: 10px;
     position: relative;
+}
+
+.char-limit {
+    max-width: 120ch;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .ratings-box {
