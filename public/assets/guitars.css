@@ -285,6 +285,12 @@ h3 {
     max-height: 100%;
 }
 
+.retailer-fav.bottom-fav {
+    top: auto;
+    bottom: 14px;
+    right: 12px; 
+}
+
 .paginator {
     height: 160px;
     width: 50%;
@@ -341,6 +347,25 @@ h3 {
     gap: 8px;
     padding: 32px;
     overflow-y: initial !important
+}
+
+#compare-wrap {
+    width: 690px;
+    max-width: 90vw;
+}
+
+#compare-cards {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+.compare-item {
+    background-color: #fff;
+    width: 260px;
+    padding: 10px;
+    position: relative;
 }
 
 .ratings-box {
@@ -453,5 +478,9 @@ h3 {
 @media screen AND (max-width: 968px) {
     .product {
         flex-basis: 100%;
+    }
+    #compare-wrap {
+        max-width: 90vw;
+        width: auto;
     }
 }

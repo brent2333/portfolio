@@ -45,17 +45,26 @@
   };
   const createCompareCards = (gridItems) => {
     const productHTMLs = gridItems.map((gItem) => {
-      return `<div class="product list-item sans-serif">
+      return `<div class="compare-item sans-serif">
             <div class="product-price">${gItem.productdata.price.value}</div>
+            <div class="ratings-box"><div class="rating"><span style="--ratingnum:${
+              gItem.productdata.rating * 20
+            }%"></span></div><div class="review-count"><span>${
+        gItem.productdata.ratingsTotal || 0
+      } reviews</span></div></div>
             <div class="product-details-container sans-serif">
                 <a href=${gItem.productdata.url} target="_blank"><h3>
                     ${gItem.productdata.title}
                   </h3></a>
             </div>
-            <div class="product-img-container" data-prod-link=${gItem.productdata.url}>
+            <div class="product-img-container" data-prod-link=${
+              gItem.productdata.url
+            }>
                 <img src=${gItem.displayImage} alt={name} />
-                <div class="retailer-fav"><img alt="retailer logo" src="/assets/img/${gItem.productdata.retailer}.png" /></div>
             </div>
+            <div class="retailer-fav bottom-fav"><img alt="retailer logo" src="/assets/img/${
+              gItem.productdata.retailer
+            }.png" /></div>
             </div>`;
     });
     return productHTMLs.join("");
@@ -74,6 +83,7 @@
     const comparedProducts = [];
     const compareButton = document.getElementById("compare-products");
     const compareModal = document.getElementById("compare-modal");
+    const compareCardBox = document.getElementById("compare-cards");
     const compareModalWrapper =
       document.getElementsByClassName("guitar-modal")[1];
 
@@ -207,7 +217,15 @@
       }
     };
 
-    compareButton.addEventListener("click", () => {
+    compareButton.addEventListener("click", async () => {
+      if (comparedProducts && comparedProducts.length) {
+        const compareCards = await createCompareCards(comparedProducts);
+        compareCardBox.innerHTML = compareCards;
+      } else {
+        compareCardBox.innerHTML =
+          "<p>Please make some selections to compare.</p>";
+      }
+      bindImageEvents();
       compareModal.classList.add("show");
     });
     compareModalWrapper.addEventListener("click", (event) => {

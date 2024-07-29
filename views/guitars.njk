@@ -73,7 +73,7 @@
                       </div>
                 </div>
                 <div class="product-price">{{ guitar.productdata.price.value }}</div>
-                <div class="ratings-box"><div class="rating"><span style="--ratingnum:{{ guitar.productdata.rating * 20 }}%"></span></div><div class="review-count"><span>{{ guitar.productdata.ratingsTotal }} reviews</span></div></div>
+                <div class="ratings-box"><div class="rating"><span style="--ratingnum:{{ guitar.productdata.rating * 20 }}%"></span></div><div class="review-count">{% if guitar.productdata.ratingsTotal %}<span>{{ guitar.productdata.ratingsTotal }} reviews</span>{% endif %}</div></div>
                 <div class="compare-ctrl"><input class="compare-chx" id={{guitar.id}} type="checkbox" /><label for={{guitar.id}}> Compare</label></div>
                 </div>
         {% endfor %}
@@ -107,10 +107,9 @@
     </div>
 </div>
 <div id="compare-modal" class="guitar-modal">
-    <div>
+    <div id="compare-wrap" class="sans-serif">
         <h2>Compare Guitars</h2>
-        <div></div>
-compare guitars
+        <div id="compare-cards"></div>
     </div>
 </div>
 <script src="/scripts/web-vitals.iife.js"></script>
