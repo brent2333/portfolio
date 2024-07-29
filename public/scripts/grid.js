@@ -31,7 +31,7 @@
                   <div class="ratings-box"><div class="rating"><span style="--ratingnum:${
                     gItem.productdata.rating * 20
                   }%"></span></div><div class="review-count"><span>${
-        gItem.productdata.ratingsTotal
+        gItem.productdata.ratingsTotal || 0
       } reviews</span></div></div>
                   <div class="compare-ctrl"><input class="compare-chx" id=${
                     gItem.id
@@ -109,8 +109,7 @@
       const currPage = document.getElementById("current-page");
       const lPagBtn = document.getElementById("left-p-btn");
       const rPagBtn = document.getElementById("right-p-btn");
-      lPagBtn.addEventListener("click", (event) => {
-        clearCompares();
+      lPagBtn.addEventListener("click", () => {
         noProductsMesssage.classList.remove("show");
         if (currPageVal > 1) {
           currPageVal -= 1;
@@ -121,7 +120,7 @@
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
-      rPagBtn.addEventListener("click", (event) => {
+      rPagBtn.addEventListener("click", () => {
         clearCompares();
         noProductsMesssage.classList.remove("show");
         currPageVal += 1;
@@ -184,6 +183,8 @@
         pGridWrap.innerHTML = newHTML;
       }
       bindImageEvents();
+      clearCompares();
+      bindInputs("compareChex");
     };
     let currPageVal = 1;
     currPage.innerHTML = currPageVal;
