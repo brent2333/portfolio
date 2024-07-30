@@ -111,6 +111,10 @@ body {
     background-color: #eee;
 }
 
+.dark body {
+    background-color: #444;
+}
+
 main {max-width: 1279px;
     margin: 0 auto;
 }
@@ -333,6 +337,10 @@ h3 {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+}
+
+.dark .paginator {
+    color: #fff;
 }
 
 .pag-btn:hover {
