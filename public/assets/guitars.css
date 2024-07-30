@@ -102,6 +102,10 @@ display: flex;
 align-content: center;
 }
 
+#grid-filters label {
+    color: #fff;
+}
+
 body {
     margin: 16px 0;
     background-color: #eee;
