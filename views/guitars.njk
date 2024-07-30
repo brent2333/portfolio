@@ -16,46 +16,48 @@
 
 <body>
     <header>
+        <div class="header-inner">
         <div class="round"><a class="logo" href="/"><img src="/assets/img/logo.jpg"  alt="logo BL"/></a></div>
 
         <h1 class="sans-serif">Electric Guitar Shopping Aggregator</h1>
         <div id="guitar-btns">
             <button id="how-made">How It's Made</button>
-        <button id="resource-timing-btn">Show Vitals & Resources </button>
-
+            <button id="resource-timing-btn">Show Vitals & Resources </button>
+        </div>
         </div>
     </header>
+    <header id="search-filters">
+        <div class="header-inner">
+            <form id="grid-filters">
+                <label for="retailers" class="sans-serif">Filter By Retailer</label>
+                <div class="select sans-serif">
+                <select name="retailers" id="retailers">
+                    <option value="">Select a Retailer</option>
+                    <option value="amazon">Amazon</option>
+                    <option value="gc">Guitar Center</option>
+                </select>
+                <span class="focus"></span>
+            </div>
+            </form>
+        <button id="compare-products">Compare</button>
+        <div>
+            <form id="grid-filters">
+                <label for="sort" class="sans-serif no-wrap">Sort By</label>
+                <div class="select sans-serif">
+                <select name="sort" id="sort">
+                    <option value="">Select a Sorting</option>
+                    <option value="lth">Price Low to High</option>
+                    <option value="htl">Price High to Low</option>
+                </select>
+                <span class="focus"></span>
+            </div>
+            </form>
+        </div>
+        </div>
+      </header>
     <main>
     <div>
-        <header id="search-filters">
-            <div>
-                <form id="grid-filters">
-                    <label for="retailers" class="sans-serif">Filter By Retailer</label>
-                    <div class="select">
-                    <select name="retailers" id="retailers">
-                        <option value="">Select a Retailer</option>
-                        <option value="amazon">Amazon</option>
-                        <option value="gc">Guitar Center</option>
-                    </select>
-                    <span class="focus"></span>
-                </div>
-                </form>
-            </div>
-            <div><button id="compare-products">Compare</button></div>
-            <div>
-                <form id="grid-filters">
-                    <label for="sort" class="sans-serif no-wrap">Sort By</label>
-                    <div class="select">
-                    <select name="sort" id="sort">
-                        <option value="">Select a Sorting</option>
-                        <option value="lth">Price Low to High</option>
-                        <option value="htl">Price High to Low</option>
-                    </select>
-                    <span class="focus"></span>
-                </div>
-                </form>
-            </div>
-          </header>
+ 
           <div id="no-products">Sorry, no products on this page for that retailer. <button id="back-btn">back</button></div>
 
     <div id="product-grid-wrapper">
@@ -88,14 +90,16 @@
       </div>
 </main>
     <footer class="sans-serif">
+        <div class="header-inner">
         <p>&copy; Copyright 2024</p>
+    </div>
       </footer>
 <script id="ddump"></script>
 <script src="/scripts/grid.js"></script>
 <div id="how-modal" class="guitar-modal">
     <div>
         <article>
-        <h3>How it's Made</h3>
+        <h3 class="sans-serif">How it's Made</h3>
         <p>I fully realize that this is not some impressive architecture or UX right now and that some developers would be deeply triggered and/or offended at a lot of it 😂. I cut corners where it didn't matter to me and didn't contribute much to the goal. Cleanup will happen, however 😉. I also realize this would not scale easily without some enhancements. I am simply putting my money where my mouth is when it comes to JS bloat and building things simply. It demonstrates accomplishing some common asks of business in a web app as simply as possible. You can see the performance of the super low-code implementation. Another goal was to see just how quickly I could build something from scratch using the bare minimum npm modules. A compare tool and other additions are upcoming.</p>
         <h3>Back End</h3>
         <p>I have a cron-job on the ExpressJS Web Service to fetch Amazon data using <a href="https://www.canopyapi.co/" target="_blank">Canopy</a> every 24 hours. In order to show data aggregation across retailers, I scraped Guitar Center for some products and put them in the DB. When the page is requested, the products are retrieved from a route, merged/sorted, and chunked, with the first 18 rendered in page, a common ask for SEO purposes.</p>
