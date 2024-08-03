@@ -3,7 +3,7 @@
 
 - 🔭 I’m currently working on **This silly easy, simple thing**
 
-- 👨‍💻 Which you can see at [brentlawson-webdev.com](http://brentlawson-webdev.com)
+- 👨‍💻 Which you can see at [brentlawson-webdeveloper.com](http://brentlawson-webdeveloper.com)
 
 - 💬 Ask me about **Front End Sanity**
 
