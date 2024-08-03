@@ -28,8 +28,11 @@ const sortProducts = (list) => {
   const gcProducts = list.filter(
     (product) => product.productdata.retailer === "gc"
   );
+  const swProducts = list.filter(
+    (product) => product.productdata.retailer === "sweetwater"
+  );
 
-  const merged = [amazonProducts, gcProducts]
+  const merged = [swProducts, amazonProducts, gcProducts]
     .reduce((r, a) => (a.forEach((a, i) => (r[i] = r[i] || []).push(a)), r), [])
     .reduce((a, b) => a.concat(b));
   return merged;
